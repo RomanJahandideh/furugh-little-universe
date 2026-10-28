@@ -37,6 +37,7 @@ export const retailProfile = {
         where: `Sales at ${homeStore}.`,
         body: "Customers came in with a project and a problem to solve. My job was to listen to what they were really trying to do, then guide them to the right product, without the jargon.",
         tone: "var(--coral)",
+        pills: ["Listening first", "Practical product guidance", "Answers without jargon"],
       },
       {
         id: "fashion",
@@ -45,6 +46,7 @@ export const retailProfile = {
         where: "Sales with GiSSO, a local clothing brand.",
         body: "Clothes are about how someone wants to feel. I learned to read personal style, suggest without pushing, and help shoppers explore options until something felt right.",
         tone: "var(--lilac)",
+        pills: ["Reading personal style", "Suggesting, never pushing", "Helping shoppers explore"],
       },
       {
         id: "hyper",
@@ -53,6 +55,7 @@ export const retailProfile = {
         where: "About a year as an on-floor salesperson in a hypermarket.",
         body: "Full aisles, long queues, a hundred small questions an hour. I stayed organised, kept calm and stayed friendly. Busy should never feel unhelpful.",
         tone: "var(--mint)",
+        pills: ["Staying organised", "Calm in a queue", "Friendly at full speed"],
       },
     ],
   },

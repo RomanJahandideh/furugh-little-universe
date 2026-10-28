@@ -118,16 +118,16 @@ function Tile({
           id={`design-${art.id}`}
           onClick={() => onOpen(art.id)}
           aria-label={`Design No. ${no}: ${art.title}. Open details`}
-          className="rise group relative block w-full text-left transition-transform duration-500 [transition-timing-function:var(--ease-bounce)] hover:!rotate-0 hover:-translate-y-1"
+          className="rise rise3d group relative block w-full text-left transition-transform duration-500 [transition-timing-function:var(--ease-bounce)] hover:!rotate-0 hover:-translate-y-1"
           style={{ rotate: `${tilt(n)}deg`, "--r0": `${tilt(n) * 3}deg` } as CSSProperties}
         >
           <figure
             className={
               frame === "polaroid"
-                ? "border-2 border-ink bg-white p-2 pb-1 shadow-[5px_5px_0_var(--ink)] sm:p-3"
+                ? "on-light bg-[#f6f3ec] p-2 pb-1 sm:p-3"
                 : frame === "wobbly"
-                  ? "wobbly-frame overflow-hidden bg-white p-1.5"
-                  : "relative rounded-[22px] border-2 border-ink bg-white p-1.5 shadow-[6px_6px_0_var(--ink)]"
+                  ? "wobbly-frame overflow-hidden bg-panel p-1.5"
+                  : "relative rounded-[22px] border border-line bg-panel p-1.5"
             }
           >
             <div className={`overflow-hidden ${frame === "wobbly" ? "wobbly-frame !border-0" : frame === "tape" ? "rounded-[16px]" : ""}`}>
@@ -138,8 +138,8 @@ function Tile({
               />
             </div>
             <figcaption className={`flex items-baseline gap-2 px-1 ${size === "pair" ? "pt-2" : "pt-3"}`}>
-              <span className="font-hand text-[1.05rem] font-bold text-ink-soft">No.&nbsp;{no}</span>
-              <span className={`font-display font-semibold leading-tight ${size === "hero" ? "text-xl sm:text-2xl" : size === "pair" ? "text-[0.95rem] sm:text-lg" : "text-lg"}`}>
+              <span className="label-mono shrink-0 text-ink-soft">No.{no}</span>
+              <span className={`font-display uppercase leading-[0.95] tracking-[-0.02em] ${size === "hero" ? "text-xl sm:text-2xl" : size === "pair" ? "text-[0.95rem] sm:text-lg" : "text-lg"}`}>
                 {art.title}
               </span>
             </figcaption>

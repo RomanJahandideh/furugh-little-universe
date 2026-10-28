@@ -41,7 +41,8 @@ export function Discovery({
   return (
     <section id="discover" aria-labelledby="mood-title" className="relative py-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <h2 id="mood-title" className="font-display text-big font-semibold">
+        <p className="label-mono mb-4 text-ink-soft"><span className="text-pink">02</span> &mdash; Find your style</p>
+        <h2 id="mood-title" className="font-display text-big uppercase">
           What&rsquo;s your <span className="marker" style={{ "--marker": "var(--pink)" } as React.CSSProperties}>nail mood</span>?
         </h2>
         <p className="mt-2 font-hand text-xl text-ink-soft">Swipe, tap one, and the sketchbook rearranges itself.</p>
@@ -53,7 +54,7 @@ export function Discovery({
         aria-label="Filter by mood"
         className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-4 px-4 pb-4 pt-2 sm:scroll-px-8 sm:px-8 lg:mx-auto lg:max-w-7xl lg:flex-wrap"
       >
-        <MoodButton active={mood === null} onClick={() => onMood(null)} accent="var(--white)" label="Show All" count={total} burst={mood === null ? burst : 0}>
+        <MoodButton active={mood === null} onClick={() => onMood(null)} accent="var(--sand)" label="Show All" count={total} burst={mood === null ? burst : 0}>
           <Sparkle className="h-9 w-9 text-ink" fillColor="var(--butter)" draw={false} />
         </MoodButton>
         {moods.map((m) => (
@@ -72,7 +73,7 @@ export function Discovery({
       </div>
 
       <div className="mx-auto mt-6 max-w-7xl px-4 sm:px-8">
-        <h3 className="font-hand text-2xl font-bold">&hellip;or dip into a color</h3>
+        <h3 className="label-mono text-ink-soft">&hellip;or dip into a color</h3>
       </div>
       <div
         role="group"
@@ -99,7 +100,7 @@ export function Discovery({
               >
                 <Paint color={c.swatch} className={`h-full w-full ${on ? "anim-jiggle" : ""}`} />
                 {on && (
-                  <span className="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full border-2 border-ink bg-white text-xs font-bold" aria-hidden>
+                  <span className="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full border border-line bg-panel text-xs font-bold" aria-hidden>
                     &#10003;
                   </span>
                 )}
@@ -148,16 +149,16 @@ function MoodButton({
       aria-label={`${label}, ${count} ${count === 1 ? "design" : "designs"}`}
       onClick={onClick}
       disabled={count === 0}
-      className={`relative flex w-[9.5rem] shrink-0 snap-start flex-col justify-between gap-3 rounded-[24px] border-2 border-ink p-3.5 text-left transition-[transform,box-shadow] duration-300 [transition-timing-function:var(--ease-bounce)] disabled:opacity-40 ${
-        active ? "-translate-y-1 -rotate-2 shadow-[4px_4px_0_var(--ink)]" : "bg-white hover:-translate-y-0.5"
+      className={`relative flex w-[9.5rem] shrink-0 snap-start flex-col justify-between gap-3 rounded-[24px] border border-line p-3.5 text-left transition-[transform,box-shadow] duration-300 [transition-timing-function:var(--ease-bounce)] disabled:opacity-40 ${
+        active ? "on-light -translate-y-1 border-transparent" : "bg-panel hover:-translate-y-0.5"
       }`}
       style={active ? { background: accent } : undefined}
     >
       <span className="flex items-start justify-between">
         {children}
-        <span className="rounded-full border-2 border-ink bg-white px-2 text-xs font-bold leading-5">{count}</span>
+        <span className="rounded-full border border-line bg-panel px-2 text-xs font-bold leading-5">{count}</span>
       </span>
-      <span className="font-display text-[1.08rem] font-semibold leading-tight">{label}</span>
+      <span className="font-display text-[1.08rem] leading-tight">{label}</span>
       {burst > 0 && <Burst key={burst} />}
     </button>
   );

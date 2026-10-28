@@ -30,7 +30,7 @@ export function NailContact({ chosen, onClear }: { chosen: GalleryArtwork | null
   };
 
   return (
-    <section id="inquire" aria-labelledby="inquire-title" className="relative scroll-mt-[calc(var(--nav-h)+1rem)] overflow-hidden bg-pink px-4 py-24 sm:px-8">
+    <section id="inquire" aria-labelledby="inquire-title" className="relative scroll-mt-[calc(var(--nav-h)+1rem)] on-light overflow-hidden bg-pink px-4 py-24 sm:px-8">
       <Reveal className="relative mx-auto max-w-3xl text-center">
         <PolishBottle aria-hidden className="pop anim-wobble absolute -left-1 -top-20 w-12 text-ink sm:-left-6 sm:-top-10 sm:w-20" polish="var(--butter)" />
         <Sparkle aria-hidden className="pop anim-twinkle absolute -top-16 right-2 w-10 text-ink sm:-top-6" fillColor="var(--white)" />
@@ -42,8 +42,8 @@ export function NailContact({ chosen, onClear }: { chosen: GalleryArtwork | null
         </p>
 
         {chosen && (
-          <div className="rise mx-auto mt-8 flex max-w-md items-center gap-4 rounded-[24px] border-2 border-ink bg-white p-3 text-left shadow-[4px_4px_0_var(--ink)]">
-            <div className="w-20 shrink-0 overflow-hidden rounded-[14px] border-2 border-ink">
+          <div className="rise mx-auto mt-8 flex max-w-md items-center gap-4 rounded-[24px] border border-line bg-panel p-3 text-left">
+            <div className="w-20 shrink-0 overflow-hidden rounded-[14px] border border-line">
               <ArtImage art={chosen} sizes="80px" decorative />
             </div>
             <div className="min-w-0 flex-1">

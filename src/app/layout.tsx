@@ -1,14 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, DM_Sans, Fraunces } from "next/font/google";
+import { Bricolage_Grotesque, Caveat, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "motion/react";
 import { SiteNav } from "@/components/navigation/SiteNav";
 import { absoluteUrl } from "@/lib/paths";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
+  axes: ["wdth", "opsz"],
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["500"],
   display: "swap",
 });
 
@@ -48,12 +55,12 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#FAFAF7",
+  themeColor: "#0E0D0C",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${dmSans.variable} ${caveat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${bricolage.variable} ${dmSans.variable} ${jetbrains.variable} ${caveat.variable}`} suppressHydrationWarning>
       <head>
         {/* Reveal animations only hide content once JS is known to be running. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

@@ -125,7 +125,7 @@ export function ArtworkDialog({
                   animate="center"
                   exit="exit"
                   transition={{ type: "spring", stiffness: 320, damping: 32 }}
-                  className="mx-auto w-fit max-w-full overflow-hidden rounded-[22px] border-2 border-ink bg-white p-1.5 shadow-[6px_6px_0_var(--ink)]"
+                  className="mx-auto w-fit max-w-full overflow-hidden rounded-[22px] border border-line bg-panel p-1.5"
                 >
                   <ArtImage
                     art={art}
@@ -138,7 +138,7 @@ export function ArtworkDialog({
               </AnimatePresence>
             </div>
 
-            <div className="rounded-[28px] border-2 border-ink bg-white p-5 sm:p-7">
+            <div className="rounded-[28px] border border-line bg-panel p-5 sm:p-7">
               <h2 id="art-title" className="font-display text-[clamp(1.8rem,6vw,2.6rem)] font-semibold leading-none">
                 {art.title}
               </h2>
@@ -151,7 +151,7 @@ export function ArtworkDialog({
                     <dt className="font-bold">Style</dt>
                     <dd className="mt-1 flex flex-wrap gap-1.5">
                       {art.categories.map((c) => (
-                        <span key={c} className="rounded-full border-2 border-ink px-2.5 py-0.5 text-sm">
+                        <span key={c} className="rounded-full border border-line px-2.5 py-0.5 text-sm">
                           {categoryLabel(c)}
                         </span>
                       ))}
@@ -163,7 +163,7 @@ export function ArtworkDialog({
                     <dt className="font-bold">Colors</dt>
                     <dd className="mt-1 flex flex-wrap gap-1.5">
                       {art.colors.map((c) => (
-                        <span key={c} className="inline-flex items-center gap-1.5 rounded-full border-2 border-ink px-2.5 py-0.5 text-sm">
+                        <span key={c} className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 text-sm">
                           <span aria-hidden className="h-3.5 w-3.5 rounded-full border border-ink" style={{ background: colorFamilies.find((f) => f.id === c)?.swatch }} />
                           {colorLabel(c)}
                         </span>

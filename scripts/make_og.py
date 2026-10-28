@@ -27,11 +27,11 @@ def card(id_, w, angle):
     return framed.convert("RGBA").rotate(angle, expand=True, resample=Image.Resampling.BICUBIC)
 
 
-def make(name, bg, title, sub, photos, size=96):
+def make(name, bg, title, sub, photos, size=96, fg=INK):
     c = Image.new("RGBA", (1200, 630), bg)
     d = ImageDraw.Draw(c)
-    d.text((70, 150), title, font=font(FONT, size), fill=INK, spacing=6)
-    d.text((74, 440), sub, font=font(SANS, 38), fill=INK)
+    d.text((70, 150), title, font=font(FONT, size), fill=fg, spacing=6)
+    d.text((74, 440), sub, font=font(SANS, 38), fill=fg)
     d.rounded_rectangle((70, 520, 520, 572), radius=26, outline=INK, width=3, fill="white")
     d.text((92, 527), "Furugh's Little Universe", font=font(SANS, 30), fill=INK)
     for id_, x, y, w, a in photos:
@@ -41,8 +41,8 @@ def make(name, bg, title, sub, photos, size=96):
 
 
 OUT.mkdir(parents=True, exist_ok=True)
-make("home", PAPER, "Hi, I'm\nFurugh.", "I work with people. And I make tiny masterpieces.",
-     [("img-1486", 760, 60, 230, -6), ("img-2848", 930, 150, 220, 7)])
+make("home", "#0E0D0C", "Hi, I'm\nFurugh.", "I work with people. And I make tiny masterpieces.",
+     [("img-1486", 760, 60, 230, -6), ("img-2848", 930, 150, 220, 7)], fg="#F3F0EA")
 make("nails", PINK, "Tiny Canvases.\nBig Personalities.", "Nail art by Furugh",
      [("img-7897", 720, 90, 190, -8), ("img-5950", 870, 40, 190, 4), ("img-8329", 990, 170, 180, 10)], size=72)
 make("retail", BUTTER, "Meet Furugh.", "Retail sales professional. People person.", [])
