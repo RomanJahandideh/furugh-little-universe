@@ -8,6 +8,7 @@ import { NumberedTabs } from "@/components/animations/NumberedTabs";
 import { Reveal } from "@/components/animations/Reveal";
 import { Hand, Heart, PolishBottle, Smile, Sparkle, Squiggle } from "@/components/illustrations/Doodles";
 import { BigFooter } from "@/components/landing/Landing";
+import { siteConfig } from "@/data/site-config";
 import { moods, type ColorId, type MoodId } from "@/data/taxonomy";
 import type { GalleryArtwork } from "@/lib/artworks";
 import { ArtImage } from "./ArtImage";
@@ -95,8 +96,8 @@ export function NailsExperience({ artworks }: { artworks: GalleryArtwork[] }) {
     window.setTimeout(() => document.getElementById("inquire")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   };
 
-  // Showcase the second featured design so the gallery doesn't open with a repeat.
-  const hero = artworks.filter((a) => a.featured)[1] ?? artworks[0];
+  // The hero photo is chosen in site-config.ts (falls back to the first featured design).
+  const hero = artworks.find((a) => a.id === siteConfig.nails.heroArtworkId) ?? artworks.find((a) => a.featured) ?? artworks[0];
   const filtered = mood !== null || colors.length > 0;
 
   return (

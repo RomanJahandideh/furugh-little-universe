@@ -98,10 +98,10 @@ export function Tilt3D({
   const rotateX = useTransform([rotateScroll, rx] as MotionValue<number>[], ([a, b]: number[]) => a + b);
   const shine = useMotionTemplate`radial-gradient(500px circle at ${useTransform(px, [-max, max], [100, 0])}% ${useTransform(py, [max, -max], [100, 0])}%, rgba(255,255,255,0.10), transparent 45%)`;
 
-  if (reduce) return <div className={className}>{children}</div>;
+  if (reduce) return <div className={`relative ${className}`}>{children}</div>;
 
   return (
-    <div ref={ref} className={className} style={{ perspective: 1400 }}>
+    <div ref={ref} className={`relative ${className}`} style={{ perspective: 1400 }}>
       <motion.div
         style={{ rotateX, rotateY: ry, scale, transformOrigin: "50% 100%", transformStyle: "preserve-3d" }}
         className="relative h-full will-change-transform"

@@ -22,6 +22,11 @@ export const siteConfig = {
   },
 
   nails: {
+    /**
+     * The big photo at the top of the Nails page. Use any id from
+     * src/data/artworks.ts, e.g. "img-7897" (Pop Garden) or "img-1486" (Hot Pink Hello).
+     */
+    heroArtworkId: "img-7897",
     /** e.g. "https://instagram.com/furugh.nails" */
     instagramUrl: null as string | null,
     instagramHandle: null as string | null,
