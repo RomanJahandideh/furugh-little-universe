@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Furugh's Little Universe
 
-## Getting Started
+**Furugh Does Things.** One person, two worlds:
 
-First, run the development server:
+- **`/retail/` · Meet Furugh, the people person.** An illustrated, scroll-driven story for employers: four chapters, a sticky store scene that redraws itself (home improvement → fashion → hypermarket), strength cards, and a "short version" receipt for busy hiring managers.
+- **`/nails/` · Tiny Canvases. Big Personalities.** A sketchbook-style gallery of Furugh's original nail art: browse by mood or by paint-blob color, open any design in a swipeable detail view, and tap "I want this one" to carry it into the inquiry section.
+- **`/`** introduces both and lets each visitor choose their own world. The two journeys never force through each other.
+
+Live: https://romanjahandideh.github.io/furugh-little-universe/
+
+## Stack
+
+Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS 4 · Motion for React (the only animation library) · hand-written SVG doodles. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
+
+Motion choices: one shared `IntersectionObserver` drives CSS reveals and stroke "draw-on" (no scroll listeners); Motion handles scroll-linked moments, filter layout transitions and the detail view. Native scrolling is never hijacked, and `prefers-reduced-motion` shows everything still. Content stays visible if JavaScript fails.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # static site in out/
+npm start          # serve out/ locally
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Adding or changing nail photos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Put the original photos (JPG, PNG or iPhone HEIC) in any folder.
+2. Run `pip install pillow pillow-heif` once, then:
+   ```bash
+   npm run images -- "C:/path/to/photo-folder"
+   ```
+   This writes color-accurate WebP files (480/960/1600 px, original color profile kept, EXIF rotation applied, no filters) to `public/images/nails/` and updates `src/data/artwork-images.json`.
+3. The script lists any photo that has no details yet, as ready-to-paste lines. Paste them into **`src/data/artworks.ts`** and fill in the title, alt text, `categories`, `colors`, `finish`, `shape`, `featured` and `order`.
+   - Photos without an entry still appear (as "Untitled"), so nothing breaks.
+   - `order` controls position (lower = earlier). `featured: true` gives a design a full-width page.
+   - Category, mood and color names live in `src/data/taxonomy.ts`.
+4. Optionally run `python scripts/make_og.py` to refresh the social-share images.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The current 60 designs were categorized by looking at each photo. Furugh should review the titles, categories and colors in `artworks.ts`.
 
-## Learn More
+## Still needed from Furugh (all in `src/data/site-config.ts`)
 
-To learn more about Next.js, take a look at the following resources:
+| Item | Where it appears | Until it's added |
+| --- | --- | --- |
+| Employer email (and optional LinkedIn) | Retail "Get in Touch" | Button shows "email coming soon" |
+| Résumé PDF → `public/resume/` + `resumePath` | Retail "View My Résumé" | Button shows "PDF coming soon" |
+| Official name of the home improvement store in Tabriz | Retail scene A + receipt | "a home improvement store in Tabriz" |
+| Instagram URL / handle, nail email, booking link, preferred contact | Nails "Found your next nail mood?" | "links are coming soon" |
+| A portrait photo (optional) | Landing hero | Doodle portrait (`Avatar` in `Doodles.tsx`) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The retail copy (`src/data/profile.ts`) uses only confirmed facts: about three years of sales experience; home improvement retail in Tabriz; GiSSO; about one year on a hypermarket floor. It adds no numbers, dates or awards. It's written in first person, so Furugh should read it and adjust the voice.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+There's no inquiry form on purpose. Without a real delivery service, a form would silently drop messages.
