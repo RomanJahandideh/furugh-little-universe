@@ -1,52 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Caveat, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "motion/react";
 import { SiteNav } from "@/components/navigation/SiteNav";
-import { absoluteUrl } from "@/lib/paths";
+import { absoluteUrl, BASE_PATH } from "@/lib/paths";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["wdth", "opsz"],
-  display: "swap",
-});
+const interTight = Inter_Tight({ variable: "--font-inter-tight", subsets: ["latin"], display: "swap" });
+const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], display: "swap" });
+const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], weight: ["500"], display: "swap" });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["500"],
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  display: "swap",
-});
+const description =
+  "Furugh is a retail sales associate with about three years of shop-floor experience and a Bachelor's in Psychology focused on customer behaviour, looking for sales roles in Canada.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
-  title: {
-    default: "Furugh | Personal Portfolio",
-    template: "%s",
-  },
-  description:
-    "Furugh Does Things: a people-first retail sales professional and a nail artist with a sketchbook full of tiny masterpieces.",
+  title: { default: "Furugh | Retail Sales Associate", template: "%s" },
+  description,
   alternates: { canonical: absoluteUrl("/") },
   openGraph: {
     type: "website",
-    siteName: "Furugh's Little Universe",
-    title: "Furugh | Personal Portfolio",
-    description: "One person. Two worlds. Meet the sales pro, or explore the nail art.",
-    images: [{ url: absoluteUrl("/og/home.png"), width: 1200, height: 630, alt: "Furugh's Little Universe" }],
+    siteName: "Furugh",
+    title: "Furugh | Retail Sales Associate",
+    description,
+    images: [{ url: absoluteUrl("/og/home.png"), width: 1200, height: 630, alt: "Furugh, retail sales associate" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -55,20 +31,23 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0E0D0C",
+  themeColor: "#F6F3EE",
 };
+
+// Runs before first paint: enables reveal animations, and shows the WELCOME
+// screen only on the homepage, once per browser session.
+const boot = `(function(d){d.classList.add('js');try{var p=location.pathname.replace(/\\/+$/,'');var home=p===${JSON.stringify(BASE_PATH)};if(home&&!sessionStorage.getItem('furugh-welcomed')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('show-welcome')}catch(e){}})(document.documentElement)`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${dmSans.variable} ${jetbrains.variable} ${caveat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${interTight.variable} ${dmSans.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
-        {/* Reveal animations only hide content once JS is known to be running. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script dangerouslySetInnerHTML={{ __html: boot }} />
       </head>
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"
         >
           Skip to content
         </a>

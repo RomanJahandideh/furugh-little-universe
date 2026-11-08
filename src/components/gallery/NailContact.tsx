@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Reveal } from "@/components/animations/Reveal";
-import { PolishBottle, Sparkle } from "@/components/illustrations/Doodles";
 import { siteConfig } from "@/data/site-config";
 import type { GalleryArtwork } from "@/lib/artworks";
 import { ArtImage } from "./ArtImage";
 
 /**
- * Inquiry section. No form: there's no confirmed delivery method yet, and a
+ * Nail inquiries. No form: there's no confirmed delivery method yet, and a
  * form that silently drops messages would be worse than none. Links appear
  * as soon as they're added to site-config.ts.
  */
@@ -30,30 +28,26 @@ export function NailContact({ chosen, onClear }: { chosen: GalleryArtwork | null
   };
 
   return (
-    <section id="inquire" aria-labelledby="inquire-title" className="relative scroll-mt-[calc(var(--nav-h)+1rem)] on-light overflow-hidden bg-pink px-4 py-24 sm:px-8">
-      <Reveal className="relative mx-auto max-w-3xl text-center">
-        <PolishBottle aria-hidden className="pop anim-wobble absolute -left-1 -top-20 w-12 text-ink sm:-left-6 sm:-top-10 sm:w-20" polish="var(--butter)" />
-        <Sparkle aria-hidden className="pop anim-twinkle absolute -top-16 right-2 w-10 text-ink sm:-top-6" fillColor="var(--white)" />
-        <h2 id="inquire-title" className="rise font-display text-huge font-semibold">
-          Found your next nail mood?
-        </h2>
-        <p className="rise mx-auto mt-5 max-w-lg text-[1.12rem]" style={{ "--i": 1 } as React.CSSProperties}>
-          Send Furugh the design you love and say hi. Tip: tap <strong>&ldquo;I want this one&rdquo;</strong> on any photo to bring it here.
+    <section id="inquire" aria-labelledby="inquire-title" className="scroll-mt-24 px-4 pb-20 sm:px-8 sm:pb-28">
+      <div className="mx-auto max-w-7xl rounded-[24px] bg-ink px-6 py-14 text-paper sm:px-12 sm:py-16">
+        <h2 id="inquire-title" className="font-display h-section max-w-2xl">Like a design? Ask about it.</h2>
+        <p className="mt-4 max-w-xl text-paper/75">
+          Open any photo and tap <strong className="text-paper">&ldquo;Ask about this design&rdquo;</strong> to bring it here, then send it to Furugh.
         </p>
 
         {chosen && (
-          <div className="rise mx-auto mt-8 flex max-w-md items-center gap-4 rounded-[24px] border border-line bg-panel p-3 text-left">
-            <div className="w-20 shrink-0 overflow-hidden rounded-[14px] border border-line">
-              <ArtImage art={chosen} sizes="80px" decorative />
+          <div className="mt-8 flex max-w-md items-center gap-4 rounded-[16px] bg-white/10 p-3">
+            <div className="w-16 shrink-0 overflow-hidden rounded-[10px]">
+              <ArtImage art={chosen} sizes="64px" decorative />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="font-hand text-lg font-bold leading-none">You&rsquo;re asking about</p>
-              <p className="truncate font-display text-lg font-semibold">{ref}</p>
-              <div className="mt-1 flex gap-3 text-sm">
-                <button type="button" onClick={copy} className="min-h-11 font-semibold underline decoration-2 underline-offset-4">
+              <p className="label text-paper/60">You&rsquo;re asking about</p>
+              <p className="truncate font-medium">{ref}</p>
+              <div className="flex gap-4 text-sm">
+                <button type="button" onClick={copy} className="min-h-11 font-semibold underline underline-offset-4">
                   {copied ? "Copied!" : "Copy a message"}
                 </button>
-                <button type="button" onClick={onClear} className="min-h-11 text-ink-soft underline underline-offset-4">
+                <button type="button" onClick={onClear} className="min-h-11 text-paper/60 underline underline-offset-4">
                   Clear
                 </button>
               </div>
@@ -61,37 +55,26 @@ export function NailContact({ chosen, onClear }: { chosen: GalleryArtwork | null
           </div>
         )}
 
-        <div className="rise mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row" style={{ "--i": 2 } as React.CSSProperties}>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           {instagramUrl && (
-            <a className="btn-ink" href={instagramUrl} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-light" href={instagramUrl} target="_blank" rel="noopener noreferrer">
               Message on Instagram{instagramHandle ? ` ${instagramHandle}` : ""}
             </a>
           )}
           {email && (
-            <a
-              className={instagramUrl ? "btn-line" : "btn-ink"}
-              href={`mailto:${email}?subject=${encodeURIComponent(ref ? `Nail inquiry: ${ref}` : "Nail inquiry")}`}
-            >
+            <a className="btn btn-ghost-light" href={`mailto:${email}?subject=${encodeURIComponent(ref ? `Nail inquiry: ${ref}` : "Nail inquiry")}`}>
               Email an inquiry
             </a>
           )}
           {bookingUrl && (
-            <a className="btn-line" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-ghost-light" href={bookingUrl} target="_blank" rel="noopener noreferrer">
               Request an appointment
             </a>
           )}
-          {!hasAny && (
-            <p className="sticker px-5 py-3 font-semibold">
-              Instagram &amp; contact links are coming soon.
-            </p>
-          )}
+          {!hasAny && <p className="rounded-full border border-white/25 px-5 py-3 text-sm">Instagram and contact links are coming soon.</p>}
         </div>
-        {preferredContact && (
-          <p className="rise mt-6 text-sm" style={{ "--i": 3 } as React.CSSProperties}>
-            Preferred contact: {preferredContact}
-          </p>
-        )}
-      </Reveal>
+        {preferredContact && <p className="mt-6 text-sm text-paper/70">Preferred contact: {preferredContact}</p>}
+      </div>
     </section>
   );
 }

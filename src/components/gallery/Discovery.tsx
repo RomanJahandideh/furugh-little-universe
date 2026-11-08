@@ -1,19 +1,8 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { Bolt, Flower, Heart, Paint, Smile, Snowflake, Sparkle, Star } from "@/components/illustrations/Doodles";
 import { colorFamilies, moods, type ColorId, type MoodId } from "@/data/taxonomy";
 
-const MOOD_ICON: Record<string, (c: string) => ReactNode> = {
-  smile: () => <Smile className="h-9 w-9 text-ink" draw={false} />,
-  star: (c) => <Star className="h-9 w-9 text-ink" fill={c} draw={false} />,
-  sparkle: (c) => <Sparkle className="h-9 w-9 text-ink" fillColor={c} draw={false} />,
-  flower: () => <Flower className="h-9 w-9 text-ink" fillColor="var(--white)" draw={false} />,
-  heart: (c) => <Heart className="h-9 w-9 text-ink" fillColor={c} draw={false} />,
-  bolt: (c) => <Bolt className="h-9 w-9 text-ink" fillColor={c} draw={false} />,
-  snow: () => <Snowflake className="h-9 w-9 text-ink" draw={false} />,
-};
-
+/** Two simple filter rows: style (one at a time) and color (any number). */
 export function Discovery({
   mood,
   colors,
@@ -21,7 +10,6 @@ export function Discovery({
   colorCounts,
   total,
   shown,
-  burst,
   onMood,
   onColor,
   onReset,
@@ -32,54 +20,27 @@ export function Discovery({
   colorCounts: Record<string, number>;
   total: number;
   shown: number;
-  burst: number;
   onMood: (m: MoodId | null) => void;
   onColor: (c: ColorId) => void;
   onReset: () => void;
 }) {
   const filtered = mood !== null || colors.length > 0;
   return (
-    <section id="discover" aria-labelledby="mood-title" className="relative py-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <p className="label-mono mb-4 text-ink-soft"><span className="text-pink">02</span> &mdash; Find your style</p>
-        <h2 id="mood-title" className="font-display text-big uppercase">
-          What&rsquo;s your <span className="marker" style={{ "--marker": "var(--pink)" } as React.CSSProperties}>nail mood</span>?
-        </h2>
-        <p className="mt-2 font-hand text-xl text-ink-soft">Swipe, tap one, and the sketchbook rearranges itself.</p>
-      </div>
-
-      {/* Mood cards: a native horizontal scroller with snap. */}
-      <div
-        role="group"
-        aria-label="Filter by mood"
-        className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-px-4 px-4 pb-4 pt-2 sm:scroll-px-8 sm:px-8 lg:mx-auto lg:max-w-7xl lg:flex-wrap"
-      >
-        <MoodButton active={mood === null} onClick={() => onMood(null)} accent="var(--sand)" label="Show All" count={total} burst={mood === null ? burst : 0}>
-          <Sparkle className="h-9 w-9 text-ink" fillColor="var(--butter)" draw={false} />
-        </MoodButton>
+    <div className="space-y-4">
+      <div role="group" aria-label="Filter by style" className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
+        <Chip active={mood === null} onClick={() => onMood(null)} label="All styles" count={total} />
         {moods.map((m) => (
-          <MoodButton
+          <Chip
             key={m.id}
             active={mood === m.id}
             onClick={() => onMood(mood === m.id ? null : m.id)}
-            accent={m.accent}
-            label={m.label}
+            label={STYLE_LABEL[m.id] ?? m.label}
             count={counts[m.id] ?? 0}
-            burst={mood === m.id ? burst : 0}
-          >
-            {MOOD_ICON[m.icon](m.accent)}
-          </MoodButton>
+          />
         ))}
       </div>
 
-      <div className="mx-auto mt-6 max-w-7xl px-4 sm:px-8">
-        <h3 className="label-mono text-ink-soft">&hellip;or dip into a color</h3>
-      </div>
-      <div
-        role="group"
-        aria-label="Filter by color (choose one or more)"
-        className="no-scrollbar mt-2 flex snap-x gap-1 overflow-x-auto px-3 pb-3 pt-2 sm:px-7 lg:mx-auto lg:max-w-7xl lg:flex-wrap"
-      >
+      <div role="group" aria-label="Filter by color (choose any)" className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
         {colorFamilies.map((c) => {
           const on = colors.includes(c.id);
           const n = colorCounts[c.id] ?? 0;
@@ -91,57 +52,42 @@ export function Discovery({
               aria-label={`${c.label}, ${n} ${n === 1 ? "design" : "designs"}`}
               disabled={n === 0}
               onClick={() => onColor(c.id)}
-              className="group flex w-[4.6rem] shrink-0 snap-start flex-col items-center gap-1 rounded-2xl p-1.5 text-center disabled:opacity-35"
+              className={`flex min-h-10 shrink-0 items-center gap-2 rounded-full border px-3 text-sm transition-colors disabled:opacity-35 ${
+                on ? "border-ink bg-ink text-paper" : "border-line bg-panel hover:border-ink"
+              }`}
             >
-              <span
-                className={`relative block h-14 w-16 transition-transform duration-500 [transition-timing-function:var(--ease-bounce)] group-hover:scale-110 group-hover:-rotate-6 ${
-                  on ? "-translate-y-1 scale-110 rotate-6" : ""
-                }`}
-              >
-                <Paint color={c.swatch} className={`h-full w-full ${on ? "anim-jiggle" : ""}`} />
-                {on && (
-                  <span className="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full border border-line bg-panel text-xs font-bold" aria-hidden>
-                    &#10003;
-                  </span>
-                )}
-              </span>
-              <span className={`text-[0.78rem] leading-tight ${on ? "font-bold" : ""}`}>{c.label}</span>
+              <span aria-hidden className="h-4 w-4 rounded-full border border-black/15" style={{ background: c.swatch }} />
+              {c.label}
             </button>
           );
         })}
       </div>
 
-      <div className="mx-auto mt-4 flex max-w-7xl flex-wrap items-center gap-3 px-4 sm:px-8">
-        <p aria-live="polite" className="font-semibold">
-          {filtered ? `Showing ${shown} of ${total} designs` : `All ${total} designs`}
+      <div className="flex min-h-11 flex-wrap items-center gap-3 text-sm">
+        <p aria-live="polite" className="text-ink-soft">
+          {filtered ? `Showing ${shown} of ${total} designs` : `${total} designs`}
         </p>
         {filtered && (
-          <button type="button" onClick={onReset} className="btn-line !min-h-11 !px-4 !py-1.5 text-sm">
-            Reset &amp; show all
+          <button type="button" onClick={onReset} className="font-semibold underline underline-offset-4">
+            Clear filters
           </button>
         )}
       </div>
-    </section>
+    </div>
   );
 }
 
-function MoodButton({
-  active,
-  onClick,
-  accent,
-  label,
-  count,
-  burst,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  accent: string;
-  label: string;
-  count: number;
-  burst: number;
-  children: ReactNode;
-}) {
+const STYLE_LABEL: Record<string, string> = {
+  minimal: "Minimal",
+  classic: "French",
+  shiny: "Chrome & glitter",
+  flower: "Floral",
+  cute: "Cute",
+  bold: "Bold",
+  seasonal: "Seasonal",
+};
+
+function Chip({ active, onClick, label, count }: { active: boolean; onClick: () => void; label: string; count: number }) {
   return (
     <button
       type="button"
@@ -149,36 +95,12 @@ function MoodButton({
       aria-label={`${label}, ${count} ${count === 1 ? "design" : "designs"}`}
       onClick={onClick}
       disabled={count === 0}
-      className={`relative flex w-[9.5rem] shrink-0 snap-start flex-col justify-between gap-3 rounded-[24px] border border-line p-3.5 text-left transition-[transform,box-shadow] duration-300 [transition-timing-function:var(--ease-bounce)] disabled:opacity-40 ${
-        active ? "on-light -translate-y-1 border-transparent" : "bg-panel hover:-translate-y-0.5"
+      className={`flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-4 text-[0.95rem] font-medium transition-colors disabled:opacity-35 ${
+        active ? "border-ink bg-ink text-paper" : "border-line bg-panel hover:border-ink"
       }`}
-      style={active ? { background: accent } : undefined}
     >
-      <span className="flex items-start justify-between">
-        {children}
-        <span className="rounded-full border border-line bg-panel px-2 text-xs font-bold leading-5">{count}</span>
-      </span>
-      <span className="font-display text-[1.08rem] leading-tight">{label}</span>
-      {burst > 0 && <Burst key={burst} />}
+      {label}
+      <span className={`text-xs ${active ? "text-paper/70" : "text-ink-soft"}`}>{count}</span>
     </button>
-  );
-}
-
-/** A little sparkle burst when a filter is picked. */
-function Burst() {
-  return (
-    <span aria-hidden className="pointer-events-none absolute inset-0">
-      {[0, 1, 2, 3, 4].map((i) => (
-        <span
-          key={i}
-          className="absolute left-1/2 top-1/2 h-4 w-4"
-          style={{
-            animation: `burst-${i} 0.7s var(--ease-out) forwards`,
-          }}
-        >
-          <Sparkle className="h-full w-full text-ink" fillColor={["var(--butter)", "var(--pink)", "var(--mint)", "var(--lilac)", "var(--coral)"][i]} draw={false} />
-        </span>
-      ))}
-    </span>
   );
 }

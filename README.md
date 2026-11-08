@@ -1,18 +1,15 @@
-# Furugh's Little Universe
+# Furugh: Retail Sales Associate
 
-**Furugh Does Things.** One person, two worlds:
+A simple, retail-styled personal site for Furugh, focused on finding a sales associate role in Canada.
 
-- **`/retail/` · Meet Furugh, the people person.** An illustrated, scroll-driven story for employers: four chapters, a sticky store scene that redraws itself (home improvement → fashion → hypermarket), strength cards, and a "short version" receipt for busy hiring managers.
-- **`/nails/` · Tiny Canvases. Big Personalities.** A sketchbook-style gallery of Furugh's original nail art: browse by mood or by paint-blob color, open any design in a swipeable detail view, and tap "I want this one" to carry it into the inquiry section.
-- **`/`** introduces both and lets each visitor choose their own world. The two journeys never force through each other.
+- **`/`: sales profile (main page).** A full-screen WELCOME on the first visit of a session, then a cinematic hero photo followed by About, Experience, Education, Skills, Next role, Nail art and Contact sections.
+- **`/nails/`: nail art.** 60 original designs in a clean grid with style and color filters, a swipeable detail view, and an inquiry section. Reached from the "My nail art" button.
 
 Live: https://romanjahandideh.github.io/furugh-little-universe/
 
 ## Stack
 
-Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS 4 · Motion for React (the only animation library) · hand-written SVG doodles. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
-
-Motion choices: one shared `IntersectionObserver` drives CSS reveals and stroke "draw-on" (no scroll listeners); Motion handles scroll-linked moments, filter layout transitions and the detail view. Native scrolling is never hijacked, and `prefers-reduced-motion` shows everything still. Content stays visible if JavaScript fails.
+Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS 4 · Motion for React. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`. Motion is deliberately calm: fade-up reveals, a slow push-in on the hero photo, and gentle parallax. `prefers-reduced-motion` turns it all off and skips the welcome screen.
 
 ## Run it
 
@@ -23,32 +20,37 @@ npm run build      # static site in out/
 npm start          # serve out/ locally
 ```
 
-## Adding or changing nail photos
+## Where to edit things
 
-1. Put the original photos (JPG, PNG or iPhone HEIC) in any folder.
-2. Run `pip install pillow pillow-heif` once, then:
-   ```bash
-   npm run images -- "C:/path/to/photo-folder"
-   ```
-   This writes color-accurate WebP files (480/960/1600 px, original color profile kept, EXIF rotation applied, no filters) to `public/images/nails/` and updates `src/data/artwork-images.json`.
-3. The script lists any photo that has no details yet, as ready-to-paste lines. Paste them into **`src/data/artworks.ts`** and fill in the title, alt text, `categories`, `colors`, `finish`, `shape`, `featured` and `order`.
-   - Photos without an entry still appear (as "Untitled"), so nothing breaks.
-   - `order` controls position (lower = earlier). `featured: true` gives a design a full-width page.
-   - Category, mood and color names live in `src/data/taxonomy.ts`.
-4. Optionally run `python scripts/make_og.py` to refresh the social-share images.
+| What | File |
+| --- | --- |
+| Contact email, phone, LinkedIn, résumé, city, university, store name | `src/data/site-config.ts` |
+| All words on the sales page | `src/data/profile.ts` |
+| Nail design titles, styles, colors, order | `src/data/artworks.ts` |
+| Style and color filter names | `src/data/taxonomy.ts` |
 
-The current 60 designs were categorized by looking at each photo. Furugh should review the titles, categories and colors in `artworks.ts`.
+## Changing the hero photo
 
-## Still needed from Furugh (all in `src/data/site-config.ts`)
+```bash
+python scripts/process_portrait.py "C:/path/to/photo.HEIC"
+```
 
-| Item | Where it appears | Until it's added |
-| --- | --- | --- |
-| Employer email (and optional LinkedIn) | Retail "Get in Touch" | Button shows "email coming soon" |
-| Résumé PDF → `public/resume/` + `resumePath` | Retail "View My Résumé" | Button shows "PDF coming soon" |
-| Official name of the home improvement store in Tabriz | Retail scene A + receipt | "a home improvement store in Tabriz" |
-| Instagram URL / handle, nail email, booking link, preferred contact | Nails "Found your next nail mood?" | "links are coming soon" |
-| A portrait photo (optional) | Landing hero | Doodle portrait (`Avatar` in `Doodles.tsx`) |
+This writes a wide (desktop) and a tall (phone) crop with a gentle cinematic grade to `public/images/profile/`. It prints the blur previews; paste them into `src/data/portrait.ts`. For a different photo, adjust `WIDE_BOX` / `TALL_BOX` at the top of the script. Then run `python scripts/make_og.py` to refresh the social-share images.
 
-The retail copy (`src/data/profile.ts`) uses only confirmed facts: about three years of sales experience; home improvement retail in Tabriz; GiSSO; about one year on a hypermarket floor. It adds no numbers, dates or awards. It's written in first person, so Furugh should read it and adjust the voice.
+## Adding nail photos
 
-There's no inquiry form on purpose. Without a real delivery service, a form would silently drop messages.
+1. Run `pip install pillow pillow-heif` once, then `npm run images -- "C:/path/to/photo-folder"`. This writes color-accurate WebP files to `public/images/nails/` and updates `src/data/artwork-images.json`.
+2. The script prints a ready-to-paste line for every photo without details. Add those lines to `src/data/artworks.ts` and fill them in. Photos without details still appear, as "Untitled".
+
+## Still needed from Furugh (`src/data/site-config.ts`)
+
+| Item | Until it's added |
+| --- | --- |
+| Employer email (and optional phone, LinkedIn) | Contact shows "coming soon" and "Get in touch" scrolls to Contact |
+| Résumé PDF → `public/resume/` + `resumePath` | "PDF coming soon" |
+| City (e.g. "Vancouver, BC") | Hero says "Canada" |
+| University and year | Only the degree name is shown |
+| Official name of the home improvement store in Tabriz | "a home improvement store in Tabriz" |
+| Instagram, nail email, booking link | Nail page says links are coming soon |
+
+The sales copy uses only confirmed facts. It adds no numbers, dates, awards or work-permit claims. Furugh should read it and adjust the voice.

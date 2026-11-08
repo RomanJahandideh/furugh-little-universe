@@ -19,14 +19,15 @@ export const siteConfig = {
      * Until then the site says "a home improvement store in Tabriz".
      */
     homeImprovementStoreName: null as string | null,
+    /** City she's based in, e.g. "Vancouver, BC". Shown in the hero when set. */
+    city: null as string | null,
+    /** University and year for the degree, e.g. "University of Tabriz, 2022". */
+    degreeSchool: null as string | null,
+    /** Phone number for employers, if she wants it public. */
+    phone: null as string | null,
   },
 
   nails: {
-    /**
-     * The big photo at the top of the Nails page. Use any id from
-     * src/data/artworks.ts, e.g. "img-7897" (Pop Garden) or "img-1486" (Hot Pink Hello).
-     */
-    heroArtworkId: "img-7897",
     /** e.g. "https://instagram.com/furugh.nails" */
     instagramUrl: null as string | null,
     instagramHandle: null as string | null,

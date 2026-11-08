@@ -26,7 +26,7 @@ export const moods = [
   { id: "classic", label: "Classic, But Not Boring?", icon: "star", accent: "var(--butter)", match: ["french"] },
   { id: "shiny", label: "Something Shiny?", icon: "sparkle", accent: "var(--lilac)", match: ["chrome", "glam"] },
   { id: "flower", label: "Flower Power?", icon: "flower", accent: "var(--pink)", match: ["floral"] },
-  { id: "cute", label: "Tiny Doodles?", icon: "heart", accent: "var(--coral)", match: ["cute"] },
+  { id: "cute", label: "Cute", icon: "heart", accent: "var(--coral)", match: ["cute"] },
   { id: "bold", label: "Make It Bold!", icon: "bolt", accent: "var(--butter)", match: ["bold", "abstract"] },
   { id: "seasonal", label: "Dressed for the Season?", icon: "snow", accent: "var(--mint)", match: ["seasonal"] },
 ] as const satisfies ReadonlyArray<{

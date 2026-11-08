@@ -1,88 +1,100 @@
 import { siteConfig } from "./site-config";
 
 /**
- * Retail story copy. Only confirmed background is used:
+ * All the words on Furugh's main (sales) page. Only confirmed background:
  *  - about three years of sales experience
- *  - sales at a home improvement store in Tabriz (official name: see site-config)
+ *  - sales at a home improvement store in Tabriz (official name: site-config)
  *  - sales with GiSSO, a local clothing brand
  *  - about one year as an on-floor salesperson in a fast-paced hypermarket
- * No numbers, awards, dates or duties beyond these have been added.
+ *  - Bachelor's in Psychology, focused on customer behaviour in retail stores
+ *    (with a focus on children, mentioned only lightly)
+ *  - looking for retail sales associate roles in Canada
+ * No numbers, dates, awards or duties beyond these have been added.
  */
 const homeStore = siteConfig.retail.homeImprovementStoreName ?? "a home improvement store in Tabriz";
 
-export const retailProfile = {
-  hero: {
-    kicker: "Furugh Does Things: No. 1",
-    title: "Meet Furugh.",
-    subtitle: "Different stores. Different people. One thing I've always loved: helping someone find exactly what they came for.",
-  },
+export const profile = {
+  role: "Retail Sales Associate",
+  headline: "I help shoppers find exactly what they came for.",
 
-  hello: {
-    title: "It Starts With Hello",
-    body: [
-      "I genuinely like people. The quick question at the end of an aisle, the customer who isn't sure what they need yet, the regular who just wants to chat for a minute.",
-      "Retail, to me, is the moment someone walks in. Make them feel noticed, listen properly, and the rest gets easier.",
-    ],
-    bubbles: ["Hi! Looking for something?", "Let me show you.", "Good choice!", "See you next time!"],
-  },
+  welcome:
+    "Welcome, and thanks for stopping by. I'm Furugh, a retail sales associate with about three years on busy shop floors and a Bachelor's degree in Psychology focused on how customers think and shop. I'm now looking for my next sales role in Canada.",
 
-  stores: {
-    title: "Every Store Has Its Own Story",
-    intro: "About three years of sales experience, in three very different kinds of shop floor.",
-    scenes: [
-      {
-        id: "home",
-        label: "Home improvement",
-        title: "Where every question is practical.",
-        where: `Sales at ${homeStore}.`,
-        body: "Customers came in with a project and a problem to solve. My job was to listen to what they were really trying to do, then guide them to the right product, without the jargon.",
-        tone: "var(--coral)",
-        pills: ["Listening first", "Practical product guidance", "Answers without jargon"],
-      },
-      {
-        id: "fashion",
-        label: "Fashion retail",
-        title: "Where it's personal.",
-        where: "Sales with GiSSO, a local clothing brand.",
-        body: "Clothes are about how someone wants to feel. I learned to read personal style, suggest without pushing, and help shoppers explore options until something felt right.",
-        tone: "var(--lilac)",
-        pills: ["Reading personal style", "Suggesting, never pushing", "Helping shoppers explore"],
-      },
-      {
-        id: "hyper",
-        label: "Busy hypermarket",
-        title: "Where everything moves fast.",
-        where: "About a year as an on-floor salesperson in a hypermarket.",
-        body: "Full aisles, long queues, a hundred small questions an hour. I stayed organised, kept calm and stayed friendly. Busy should never feel unhelpful.",
-        tone: "var(--mint)",
-        pills: ["Staying organised", "Calm in a queue", "Friendly at full speed"],
-      },
-    ],
-  },
-
-  strengths: {
-    title: "What I Bring to the Floor",
-    cards: [
-      { icon: "chat", title: "Customer communication", body: "Clear, warm and patient, whether it's a quick answer or a long conversation." },
-      { icon: "compass", title: "Product guidance", body: "Turning “I'm not sure what I need” into a confident choice." },
-      { icon: "shuffle", title: "Adaptability", body: "Hardware, fashion and groceries: three different paces, one steady attitude." },
-      { icon: "highfive", title: "Team collaboration", body: "Covering a gap, sharing the load, keeping the floor running smoothly together." },
-      { icon: "radar", title: "Reading customer needs", body: "Noticing who wants help, who wants space, and what they're actually looking for." },
-      { icon: "lightning", title: "Calm in the rush", body: "Comfortable on a busy floor, staying organised and responsive when it's packed." },
-      { icon: "ribbon", title: "Friendly, professional service", body: "Approachable without being pushy. Every customer leaves feeling looked after." },
-    ],
-  },
-
-  facts: [
-    "About 3 years of sales experience",
-    `Home improvement retail: ${homeStore}`,
-    "Fashion retail: GiSSO (local clothing brand)",
-    "About 1 year on the floor of a fast-paced hypermarket",
-    "Looking for: retail sales associate roles",
+  glance: [
+    { value: "~3 yrs", label: "Retail sales experience" },
+    { value: "3", label: "Store formats: home, fashion, hypermarket" },
+    { value: "Bachelor's", label: "Psychology, customer behaviour" },
+    { value: "Canada", label: "Open to sales associate roles" },
   ],
 
-  next: {
-    title: "New store. New faces. Same energy.",
-    body: "I'm looking for my next retail sales associate role, somewhere with customers to help and a team to be part of.",
+  experience: [
+    {
+      dept: "Home improvement",
+      where: `Sales associate, ${homeStore}`,
+      summary: "Practical shopping, practical questions.",
+      points: [
+        "Helped customers with a project in mind find the right product for it.",
+        "Explained options in plain language, without the jargon.",
+        "Listened first, then guided the decision.",
+      ],
+    },
+    {
+      dept: "Fashion retail",
+      where: "Sales associate, GiSSO (local clothing brand)",
+      summary: "Personal style, personal service.",
+      points: [
+        "Helped shoppers explore options until something felt right.",
+        "Suggested pieces based on personal style, without pushing.",
+        "Kept the shopping experience welcoming and relaxed.",
+      ],
+    },
+    {
+      dept: "Hypermarket",
+      where: "On-floor salesperson, about 1 year",
+      summary: "Busy aisles, steady service.",
+      points: [
+        "Stayed organised and responsive on a fast-paced floor.",
+        "Answered a steady stream of customer questions, calmly and quickly.",
+        "Kept service friendly, even at the busiest times.",
+      ],
+    },
+  ],
+
+  education: {
+    degree: "Bachelor's degree in Psychology",
+    school: siteConfig.retail.degreeSchool,
+    focus:
+      "My studies focused on customer behaviour in retail stores: how shoppers make decisions, what makes a store feel easy and welcoming, and how good service changes the outcome, including how families shop together.",
+    onTheFloor: [
+      { title: "Reading the customer", body: "Noticing what someone actually needs, not just what they first ask for." },
+      { title: "Making choices easy", body: "Narrowing options so the decision feels confident, never pressured." },
+      { title: "Welcoming every shopper", body: "Creating an experience that works for every age, from first-time visitors to regulars." },
+    ],
   },
+
+  skills: [
+    "Customer service",
+    "Product guidance",
+    "Clear communication",
+    "Reading customer needs",
+    "Team collaboration",
+    "Calm in busy stores",
+    "Adaptability",
+    "Friendly, professional manner",
+  ],
+
+  lookingFor: {
+    title: "Ready for a Canadian sales floor.",
+    body: "I'm looking for a retail sales associate role in Canada, in fashion, home or general retail, with a team that cares about customers as much as I do.",
+    roles: ["Sales Associate", "Customer Service", "Retail Floor Staff"],
+  },
+
+  receipt: [
+    "About 3 years of retail sales experience",
+    `Home improvement retail: ${homeStore}`,
+    "Fashion retail: GiSSO",
+    "About 1 year on a hypermarket floor",
+    "Bachelor's in Psychology (customer behaviour)",
+    "Looking for: sales associate roles in Canada",
+  ],
 };

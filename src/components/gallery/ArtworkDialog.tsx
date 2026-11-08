@@ -90,10 +90,10 @@ export function ArtworkDialog({
       {art && (
         <div className="mx-auto flex min-h-full max-w-5xl flex-col px-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6">
           <div className="sticky top-0 z-10 flex items-center justify-between gap-3 py-2">
-            <p className="sticker px-3 py-1 font-hand text-lg font-bold">
+            <p className="label rounded-full border border-line bg-panel px-3 py-1.5">
               No. {no} <span className="text-ink-soft">/ {String(list.length).padStart(2, "0")}</span>
             </p>
-            <button type="button" onClick={onClose} className="sticker grid h-12 w-12 place-items-center text-2xl font-bold" aria-label="Close and return to the gallery">
+            <button type="button" onClick={onClose} className="grid h-12 w-12 place-items-center rounded-full border border-line bg-panel text-2xl" aria-label="Close and return to the gallery">
               &times;
             </button>
           </div>
@@ -139,10 +139,10 @@ export function ArtworkDialog({
             </div>
 
             <div className="rounded-[28px] border border-line bg-panel p-5 sm:p-7">
-              <h2 id="art-title" className="font-display text-[clamp(1.8rem,6vw,2.6rem)] font-semibold leading-none">
+              <h2 id="art-title" className="font-display text-[clamp(1.8rem,6vw,2.6rem)] leading-none">
                 {art.title}
               </h2>
-              {art.note && <p className="mt-2 font-hand text-2xl font-bold text-ink-soft">{art.note}</p>}
+              {art.note && <p className="mt-2 italic text-ink-soft">{art.note}</p>}
               <p className="mt-3 text-[0.98rem] text-ink-soft">{art.alt}</p>
 
               <dl className="mt-5 space-y-3 text-[0.95rem]">
@@ -189,15 +189,15 @@ export function ArtworkDialog({
                 )}
               </dl>
 
-              <button type="button" className="btn-ink mt-6 w-full" onClick={() => onInquire(art)}>
-                I want this one
+              <button type="button" className="btn btn-dark mt-6 w-full" onClick={() => onInquire(art)}>
+                Ask about this design
               </button>
 
               <div className="mt-4 grid grid-cols-2 gap-3">
-                <button type="button" className="btn-line" onClick={() => go(-1)} disabled={list.length < 2}>
+                <button type="button" className="btn btn-outline" onClick={() => go(-1)} disabled={list.length < 2}>
                   <span aria-hidden>&larr;</span> Previous
                 </button>
-                <button type="button" className="btn-line" onClick={() => go(1)} disabled={list.length < 2}>
+                <button type="button" className="btn btn-outline" onClick={() => go(1)} disabled={list.length < 2}>
                   Next <span aria-hidden>&rarr;</span>
                 </button>
               </div>

@@ -1,14 +1,14 @@
-"""Build the three 1200x630 social-share images in public/og/ from real gallery photos.
-Usage: python scripts/make_og.py   (run after process_images.py)"""
+"""Build the 1200x630 social-share images in public/og/.
+Usage: python scripts/make_og.py   (run after process_portrait.py and process_images.py)"""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
-NAILS = ROOT / "public" / "images" / "nails"
-OUT = ROOT / "public" / "og"
-INK, PAPER, PINK, BUTTER = "#191919", "#FAFAF7", "#FF75B7", "#FFE17B"
-FONT = "C:/Windows/Fonts/georgiab.ttf"
-SANS = "C:/Windows/Fonts/segoeui.ttf"
+PUBLIC = ROOT / "public"
+OUT = PUBLIC / "og"
+PAPER, INK = "#F6F3EE", "#161514"
+BOLD = "C:/Windows/Fonts/arialbd.ttf"
+REG = "C:/Windows/Fonts/arial.ttf"
 
 
 def font(path, size):
@@ -18,32 +18,39 @@ def font(path, size):
         return ImageFont.load_default(size)
 
 
-def card(id_, w, angle):
-    im = Image.open(NAILS / f"{id_}-960.webp").convert("RGB")
-    im = ImageOps.fit(im, (w, round(w * 4 / 3)))
-    framed = Image.new("RGB", (im.width + 16, im.height + 16), "white")
-    framed.paste(im, (8, 8))
-    framed = ImageOps.expand(framed, border=4, fill=INK)
-    return framed.convert("RGBA").rotate(angle, expand=True, resample=Image.Resampling.BICUBIC)
-
-
-def make(name, bg, title, sub, photos, size=96, fg=INK):
-    c = Image.new("RGBA", (1200, 630), bg)
+def home():
+    photo = Image.open(PUBLIC / "images/profile/hero-wide-1920.webp").convert("RGB")
+    c = ImageOps.fit(photo, (1200, 630), centering=(0.6, 0.45)).convert("RGBA")
+    shade = Image.new("RGBA", c.size)
+    d = ImageDraw.Draw(shade)
+    for x in range(700):
+        d.line([(x, 0), (x, 630)], fill=(14, 11, 9, int(215 * (1 - x / 700))))
+    c.alpha_composite(shade)
     d = ImageDraw.Draw(c)
-    d.text((70, 150), title, font=font(FONT, size), fill=fg, spacing=6)
-    d.text((74, 440), sub, font=font(SANS, 38), fill=fg)
-    d.rounded_rectangle((70, 520, 520, 572), radius=26, outline=INK, width=3, fill="white")
-    d.text((92, 527), "Furugh's Little Universe", font=font(SANS, 30), fill=INK)
-    for id_, x, y, w, a in photos:
-        k = card(id_, w, a)
-        c.alpha_composite(k, (x, y))
-    c.convert("RGB").save(OUT / f"{name}.png", optimize=True)
+    d.text((70, 200), "RETAIL SALES ASSOCIATE", font=font(REG, 26), fill=(255, 255, 255, 200))
+    d.text((66, 240), "Furugh", font=font(BOLD, 140), fill="white")
+    d.text((70, 420), "I help shoppers find exactly\nwhat they came for.", font=font(REG, 36), fill="white", spacing=10)
+    c.convert("RGB").save(OUT / "home.png", optimize=True)
+
+
+def nails():
+    ids = ["img-7897", "img-1486", "img-5950", "img-8329"]
+    c = Image.new("RGB", (1200, 630), PAPER)
+    d = ImageDraw.Draw(c)
+    d.text((60, 70), "Nail art by", font=font(REG, 40), fill=INK)
+    d.text((56, 115), "Furugh", font=font(BOLD, 110), fill=INK)
+    d.text((60, 520), "60 original, hand-painted designs", font=font(REG, 30), fill="#625d55")
+    x = 560
+    for i, id_ in enumerate(ids):
+        im = ImageOps.fit(Image.open(PUBLIC / f"images/nails/{id_}-480.webp").convert("RGB"), (150, 200 if i % 2 else 240))
+        c.paste(im, (x, 120 if i % 2 else 80))
+        x += 160
+    c.save(OUT / "nails.png", optimize=True)
 
 
 OUT.mkdir(parents=True, exist_ok=True)
-make("home", "#0E0D0C", "Hi, I'm\nFurugh.", "I work with people. And I make tiny masterpieces.",
-     [("img-1486", 760, 60, 230, -6), ("img-2848", 930, 150, 220, 7)], fg="#F3F0EA")
-make("nails", PINK, "Tiny Canvases.\nBig Personalities.", "Nail art by Furugh",
-     [("img-7897", 720, 90, 190, -8), ("img-5950", 870, 40, 190, 4), ("img-8329", 990, 170, 180, 10)], size=72)
-make("retail", BUTTER, "Meet Furugh.", "Retail sales professional. People person.", [])
-print("wrote", [p.name for p in OUT.iterdir()])
+home()
+nails()
+for stale in ["retail.png"]:
+    (OUT / stale).unlink(missing_ok=True)
+print("wrote", sorted(p.name for p in OUT.iterdir()))
