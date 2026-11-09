@@ -32,7 +32,7 @@ export function getArtworks(): GalleryArtwork[] {
       const d: NailArtwork = details.get(id) ?? {
         id,
         title: "Untitled design",
-        alt: "Nail art by Furugh",
+        alt: "Nail art by Forough",
         categories: [],
         colors: [],
         featured: false,

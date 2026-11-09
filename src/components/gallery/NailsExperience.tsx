@@ -63,7 +63,7 @@ export function NailsExperience({ artworks }: { artworks: GalleryArtwork[] }) {
         <Link href="/" className="label inline-flex min-h-11 items-center gap-2 text-ink-soft hover:text-ink">
           <span aria-hidden>&larr;</span> Back to sales profile
         </Link>
-        <h1 className="font-display h-section mt-3">Nail art by Furugh</h1>
+        <h1 className="font-display h-section mt-3">Nail art by Forough</h1>
         <p className="mt-3 max-w-xl text-[1.1rem] text-ink-soft">
           {artworks.length} original designs, painted by hand. Filter by style or color, and tap any photo for details.
         </p>

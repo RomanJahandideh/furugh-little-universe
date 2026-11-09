@@ -10,19 +10,19 @@ const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], display
 const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], weight: ["500"], display: "swap" });
 
 const description =
-  "Furugh is a retail sales associate with about three years of shop-floor experience and a Bachelor's in Psychology focused on customer behaviour, looking for sales roles in Canada.";
+  "Forough Mahmoudpour is a friendly retail sales associate in Surrey, BC, with sales, customer service and cashier experience, a Bachelor's in Psychology focused on consumer behaviour, and five languages.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
-  title: { default: "Furugh | Retail Sales Associate", template: "%s" },
+  title: { default: "Forough Mahmoudpour | Retail Sales Associate", template: "%s" },
   description,
   alternates: { canonical: absoluteUrl("/") },
   openGraph: {
     type: "website",
-    siteName: "Furugh",
-    title: "Furugh | Retail Sales Associate",
+    siteName: "Forough Mahmoudpour",
+    title: "Forough Mahmoudpour | Retail Sales Associate",
     description,
-    images: [{ url: absoluteUrl("/og/home.png"), width: 1200, height: 630, alt: "Furugh, retail sales associate" }],
+    images: [{ url: absoluteUrl("/og/home.png"), width: 1200, height: 630, alt: "Forough Mahmoudpour, retail sales associate" }],
   },
   twitter: { card: "summary_large_image" },
 };

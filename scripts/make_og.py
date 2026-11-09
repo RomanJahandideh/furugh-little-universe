@@ -28,7 +28,7 @@ def home():
     c.alpha_composite(shade)
     d = ImageDraw.Draw(c)
     d.text((70, 200), "RETAIL SALES ASSOCIATE", font=font(REG, 26), fill=(255, 255, 255, 200))
-    d.text((66, 240), "Furugh", font=font(BOLD, 140), fill="white")
+    d.text((66, 240), "Forough", font=font(BOLD, 130), fill="white")
     d.text((70, 420), "I help shoppers find exactly\nwhat they came for.", font=font(REG, 36), fill="white", spacing=10)
     c.convert("RGB").save(OUT / "home.png", optimize=True)
 
@@ -38,7 +38,7 @@ def nails():
     c = Image.new("RGB", (1200, 630), PAPER)
     d = ImageDraw.Draw(c)
     d.text((60, 70), "Nail art by", font=font(REG, 40), fill=INK)
-    d.text((56, 115), "Furugh", font=font(BOLD, 110), fill=INK)
+    d.text((56, 115), "Forough", font=font(BOLD, 110), fill=INK)
     d.text((60, 520), "60 original, hand-painted designs", font=font(REG, 30), fill="#625d55")
     x = 560
     for i, id_ in enumerate(ids):

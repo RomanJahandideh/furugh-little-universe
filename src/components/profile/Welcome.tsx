@@ -55,7 +55,7 @@ export function Welcome() {
     <div id="welcome" ref={ref} role="presentation">
       <div className="px-6 text-center">
         <p className="w-word">WELCOME</p>
-        <p className="w-sub label mt-5 text-ink-soft">Furugh &middot; Retail Sales Associate</p>
+        <p className="w-sub label mt-5 text-ink-soft">Forough &middot; Retail Sales Associate</p>
       </div>
     </div>
   );

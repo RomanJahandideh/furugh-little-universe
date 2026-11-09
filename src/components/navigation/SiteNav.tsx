@@ -45,7 +45,7 @@ export function SiteNav() {
     >
       <nav aria-label="Main" className="mx-auto flex h-[var(--nav-h)] max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
         <Link href="/" className="flex min-h-11 items-center font-display text-[1.35rem] font-bold tracking-[-0.03em]">
-          Furugh
+          Forough
           <span className={light ? "text-white/70" : "text-accent"}>.</span>
         </Link>
 
