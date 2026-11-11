@@ -27,7 +27,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Served from the root of the custom domain furugh.com, so no sub-path.
+          NEXT_PUBLIC_BASE_PATH: ""
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

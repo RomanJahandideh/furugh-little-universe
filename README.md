@@ -5,7 +5,7 @@ A simple, retail-styled personal site for Forough Mahmoudpour, focused on findin
 - **`/`: sales profile (main page).** A full-screen WELCOME on the first visit of a session, then a cinematic hero photo followed by About, Experience, Education, Skills, Next role, Nail art and Contact sections.
 - **`/nails/`: nail art.** 60 original designs in a clean grid with style and color filters, a swipeable detail view, and an inquiry section. Reached from the "My nail art" button.
 
-Live: https://romanjahandideh.github.io/furugh-little-universe/
+Live: https://furugh.com (custom domain on GitHub Pages; DNS at Namecheap)
 
 ## Stack
 

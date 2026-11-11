@@ -6,7 +6,7 @@
 export const siteConfig = {
   name: "Forough Mahmoudpour",
   shortName: "Forough",
-  siteUrl: "https://romanjahandideh.github.io/furugh-little-universe",
+  siteUrl: "https://furugh.com",
 
   retail: {
     email: "furughmp77@gmail.com" as string | null,
