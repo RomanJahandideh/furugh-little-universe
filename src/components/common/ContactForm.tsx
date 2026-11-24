@@ -20,7 +20,7 @@ export function ContactForm({
   dark?: boolean;
 }) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
-  const email = siteConfig.retail.email;
+  const email = siteConfig.contact.email;
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,8 +47,8 @@ export function ContactForm({
   };
 
   const field = dark
-    ? "w-full rounded-xl border border-white/30 bg-white/10 px-4 py-3 text-white placeholder:text-white/55 focus:border-white focus:outline-none"
-    : "w-full rounded-xl border border-line bg-panel px-4 py-3 placeholder:text-ink-soft/70 focus:border-ink focus:outline-none";
+    ? "w-full rounded-md border border-[#e2c378]/40 bg-white/8 px-4 py-3 text-white placeholder:text-white/55 focus:border-[#e2c378] focus:outline-none"
+    : "w-full rounded-md border border-line bg-panel px-4 py-3 placeholder:text-ink-soft/70 focus:border-ink focus:outline-none";
   const lbl = `mb-1.5 block text-sm font-medium ${dark ? "text-white/85" : ""}`;
 
   if (status.kind === "sent") {
@@ -87,7 +87,7 @@ export function ContactForm({
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
       <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
-        <button type="submit" disabled={status.kind === "sending"} className={`btn ${dark ? "btn-light" : "btn-dark"} disabled:opacity-60`}>
+        <button type="submit" disabled={status.kind === "sending"} className={`btn ${dark ? "btn-gold" : "btn-dark"} disabled:opacity-60`}>
           {status.kind === "sending" ? "Sending…" : "Send message"}
         </button>
         <p aria-live="polite" className={`text-sm ${dark ? "text-white/90" : "text-ink-soft"}`}>

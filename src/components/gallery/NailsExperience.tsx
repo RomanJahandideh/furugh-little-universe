@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { Footer } from "@/components/profile/SalesProfile";
+import { Footer, PageHeader } from "@/components/common/Chrome";
 import { moods, type ColorId, type MoodId } from "@/data/taxonomy";
 import type { GalleryArtwork } from "@/lib/artworks";
 import { ArtworkDialog } from "./ArtworkDialog";
@@ -59,17 +58,13 @@ export function NailsExperience({ artworks }: { artworks: GalleryArtwork[] }) {
 
   return (
     <main id="main" className="overflow-x-clip">
-      <header className="mx-auto max-w-7xl px-4 pb-8 pt-[calc(var(--nav-h)+env(safe-area-inset-top)+2.5rem)] sm:px-8">
-        <Link href="/" className="label inline-flex min-h-11 items-center gap-2 text-ink-soft hover:text-ink">
-          <span aria-hidden>&larr;</span> Back to sales profile
-        </Link>
-        <h1 className="font-display h-section mt-3">Nail art by Forough</h1>
-        <p className="mt-3 max-w-xl text-[1.1rem] text-ink-soft">
-          {artworks.length} original designs, painted by hand. Filter by style or color, and tap any photo for details.
-        </p>
-      </header>
+      <PageHeader
+        kicker="Path two"
+        title="Nail Artistry"
+        intro={`Nail technician and artist. ${artworks.length} original, hand-painted designs: filter by style or colour, and tap any photo for details.`}
+      />
 
-      <section id="gallery" ref={galleryTop} aria-label="Nail art gallery" className="mx-auto max-w-7xl scroll-mt-20 px-4 pb-20 sm:px-8">
+      <section id="gallery" ref={galleryTop} aria-label="Nail art gallery" className="mx-auto max-w-7xl scroll-mt-20 px-4 pb-20 pt-12 sm:px-8 sm:pt-16">
         <div className="mb-6">
           <Discovery
             mood={mood}

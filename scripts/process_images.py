@@ -2,7 +2,8 @@
 Turn Furugh's original nail photos into web-ready, color-accurate WebP files.
 
 Usage (from the project root):
-    python scripts/process_images.py "<folder with original photos>"
+    python scripts/process_images.py "<folder with original photos>"                  # nail art
+    python scripts/process_images.py "<folder with original photos>" --set paintings  # decorative painting
 
 What it does, for every .jpg / .jpeg / .png / .heic in that folder:
   * applies the camera's EXIF rotation, so nothing appears sideways
@@ -36,9 +37,15 @@ except ImportError:  # HEIC files will be skipped with a warning
     pillow_heif = None
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT_DIR = ROOT / "public" / "images" / "nails"
-MANIFEST = ROOT / "src" / "data" / "artwork-images.json"
-METADATA = ROOT / "src" / "data" / "artworks.ts"
+SETS = {
+    "nails": ("nails", "artwork-images.json", "artworks.ts"),
+    "paintings": ("paintings", "painting-images.json", "paintings.ts"),
+}
+SET = sys.argv[sys.argv.index("--set") + 1] if "--set" in sys.argv else "nails"
+_dir, _manifest, _meta = SETS[SET]
+OUT_DIR = ROOT / "public" / "images" / _dir
+MANIFEST = ROOT / "src" / "data" / _manifest
+METADATA = ROOT / "src" / "data" / _meta
 WIDTHS = [480, 960, 1600]
 QUALITY = 82
 EXTS = {".jpg", ".jpeg", ".png", ".heic", ".heif"}

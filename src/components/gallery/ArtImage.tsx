@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import type { GalleryArtwork } from "@/lib/artworks";
 
 /**
  * Responsive, color-true photo: WebP srcset with real dimensions (no layout
@@ -14,7 +13,7 @@ export function ArtImage({
   decorative = false,
   fill = true,
 }: {
-  art: GalleryArtwork;
+  art: { src: string; srcSet: string; width: number; height: number; blur: string; alt: string };
   sizes: string;
   priority?: boolean;
   className?: string;

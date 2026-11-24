@@ -1,17 +1,22 @@
 @import "tailwindcss";
 
-/* ---------- Design tokens: "Shopfront" ----------
-   Warm paper, ink, and one accent taken from the maples (and her red bag). */
+/* ---------- Design tokens: "Atelier" ----------
+   Parchment, lapis and gold leaf, after the palettes of Persian, Mughal
+   and Chinese miniature painting. */
 :root {
-  --paper: #f6f3ee;
-  --white: #ffffff;
-  --ink: #161514;
-  --ink-soft: #625d55;
-  --line: rgba(22, 21, 20, 0.12);
-  --sand: #ece6dc;
-  --sage: #dcebd6;
-  --accent: #b8322a;
-  --accent-hover: #9e2a23;
+  --paper: #f5eee1;
+  --white: #fbf7ef;
+  --ink: #221c16;
+  --ink-soft: #6b5e50;
+  --line: rgba(34, 28, 22, 0.14);
+  --sand: #ebe1cf;
+  --lapis: #1c3564;
+  --lapis-deep: #13254a;
+  --gold: #b8892e;
+  --gold-light: #e2c378;
+  --accent: #9c3b26; /* vermilion */
+  --accent-hover: #83301f;
+  --jade: #3e7d6b;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --nav-h: 64px;
   color-scheme: light;
@@ -24,11 +29,14 @@
   --color-ink-soft: var(--ink-soft);
   --color-line: var(--line);
   --color-sand: var(--sand);
-  --color-sage: var(--sage);
+  --color-lapis: var(--lapis);
+  --color-lapis-deep: var(--lapis-deep);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
   --color-accent: var(--accent);
-  --font-display: var(--font-inter-tight), system-ui, sans-serif;
+  --color-jade: var(--jade);
+  --font-display: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
 /* ---------- Base ---------- */
@@ -45,185 +53,148 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #fff;
+  background: var(--gold-light);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 .font-display {
   font-family: var(--font-display);
-  font-weight: 650;
-  letter-spacing: -0.035em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
-/* Small uppercase labels, like shelf tags and store signage. */
+/* Small caps labels, like the captions in an illuminated manuscript. */
 .label {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
-.h-hero { font-size: clamp(3.4rem, 14vw, 9rem); line-height: 0.9; }
-.h-section { font-size: clamp(2rem, 6.5vw, 3.6rem); line-height: 1.02; }
-.h-card { font-size: clamp(1.35rem, 4vw, 1.75rem); line-height: 1.1; }
+.h-hero { font-size: clamp(2.9rem, 11vw, 6.6rem); line-height: 0.98; }
+.h-section { font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.02; }
+.h-card { font-size: clamp(1.5rem, 4.4vw, 2rem); line-height: 1.1; }
 
-/* ---------- Components ---------- */
+/* ---------- Surfaces ---------- */
+.lapis {
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(255, 255, 255, 0.07), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23d9b465' stroke-width='0.7' opacity='0.16'%3E%3Crect x='22' y='22' width='28' height='28'/%3E%3Crect x='22' y='22' width='28' height='28' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Ccircle cx='0' cy='0' r='9'/%3E%3Ccircle cx='72' cy='0' r='9'/%3E%3Ccircle cx='0' cy='72' r='9'/%3E%3Ccircle cx='72' cy='72' r='9'/%3E%3C/g%3E%3C/svg%3E"),
+    var(--lapis);
+  color: #f4ecdc;
+}
+
+/* Double gilded rule, like a miniature's page border. */
+.gilded-frame {
+  border: 1px solid rgba(226, 195, 120, 0.85);
+  box-shadow: inset 0 0 0 5px transparent, inset 0 0 0 6px rgba(226, 195, 120, 0.5);
+}
+
+.paper-panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 6px var(--white), inset 0 0 0 7px rgba(184, 137, 46, 0.35);
+}
+
+/* ---------- Buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
   min-height: 48px;
-  padding: 0.75rem 1.35rem;
+  padding: 0.75rem 1.4rem;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 0.98rem;
+  font-size: 0.97rem;
   transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.3s var(--ease-out);
 }
 .btn:active { transform: translateY(1px); }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-hover); }
-.btn-dark { background: var(--ink); color: var(--paper); }
-.btn-dark:hover { background: #2c2a27; }
+.btn-dark { background: var(--lapis); color: #f4ecdc; }
+.btn-dark:hover { background: var(--lapis-deep); }
+.btn-gold { background: linear-gradient(135deg, #e9c977, #c3923a); color: #1c1408; }
+.btn-gold:hover { filter: brightness(1.06); }
 .btn-outline { border: 1px solid var(--line); color: var(--ink); background: var(--white); }
-.btn-outline:hover { border-color: var(--ink); }
-.btn-light { background: rgba(255, 255, 255, 0.94); color: var(--ink); }
+.btn-outline:hover { border-color: var(--gold); }
+.btn-light { background: #f8f2e6; color: var(--ink); }
 .btn-light:hover { background: #fff; }
-.btn-ghost-light { border: 1px solid rgba(255, 255, 255, 0.55); color: #fff; }
-.btn-ghost-light:hover { background: rgba(255, 255, 255, 0.12); }
+.btn-ghost-light { border: 1px solid rgba(244, 236, 220, 0.5); color: #f4ecdc; }
+.btn-ghost-light:hover { background: rgba(255, 255, 255, 0.1); }
 .btn[aria-disabled="true"] {
   background: transparent;
   color: var(--ink-soft);
   border: 1px dashed color-mix(in srgb, var(--ink-soft) 60%, transparent);
   cursor: not-allowed;
 }
-/* On dark or red panels, "coming soon" buttons stay readable. */
-.on-color .btn[aria-disabled="true"] {
-  color: rgba(255, 255, 255, 0.85);
-  border-color: rgba(255, 255, 255, 0.6);
-  opacity: 1;
-}
-
-/* Wayfinding sign used as a section label: "01  About". */
-.aisle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-.aisle b {
-  display: inline-grid;
-  place-items: center;
-  min-width: 2rem;
-  height: 1.5rem;
-  padding: 0 0.4rem;
-  border-radius: 4px;
-  background: var(--ink);
-  color: var(--paper);
-  font-weight: 500;
-}
-
-/* Price-tag chip with a punched hole. */
-.tag {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0.45rem 1rem 0.45rem 1.6rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 6px 10px 10px 6px;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-.tag::before {
-  content: "";
-  position: absolute;
-  left: 0.6rem;
-  top: 50%;
-  width: 0.42rem;
-  height: 0.42rem;
-  margin-top: -0.21rem;
-  border-radius: 999px;
-  background: var(--paper);
-  box-shadow: inset 0 0 0 1px var(--line);
-}
 
 .card {
   background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 6px;
 }
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* ---------- Motion (calm) ---------- */
+/* ---------- Ornaments ---------- */
+.orn { overflow: visible; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Gold lines draw themselves on, like a brush laying gold leaf. */
+.dl {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2.4s var(--ease-out) var(--d, 0s);
+}
+.js .reveal:not(.in) .dl { stroke-dashoffset: 1; }
+
+.fl { transition: opacity 1.4s ease var(--fd, 1.4s); }
+.js .reveal:not(.in) .fl { opacity: 0; }
+
+@keyframes turn { to { transform: rotate(360deg); } }
+.slow-turn { animation: turn 180s linear infinite; }
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50% { transform: rotate(1.2deg); }
+}
+.sway { animation: sway 9s ease-in-out infinite; transform-origin: 0% 100%; }
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(14px, -4px, 0); }
+}
+.drift { animation: drift 14s ease-in-out infinite; }
+
+/* Arch-shaped picture window. */
+.arch { clip-path: url(#arch-clip); }
+
+/* ---------- Content reveal ---------- */
 .rise {
-  transition: opacity 0.8s var(--ease-out) calc(var(--i, 0) * 80ms), transform 0.9s var(--ease-out) calc(var(--i, 0) * 80ms);
+  transition: opacity 0.9s var(--ease-out) calc(var(--i, 0) * 90ms), transform 1s var(--ease-out) calc(var(--i, 0) * 90ms);
 }
 .js .reveal:not(.in) .rise {
   opacity: 0;
   transform: translate3d(0, 22px, 0);
 }
 
-/* Slow cinematic push-in on the hero photo. */
-@keyframes push-in {
-  from { transform: scale(1.08); }
-  to { transform: scale(1); }
-}
-.push-in { animation: push-in 9s var(--ease-out) both; }
-
-/* ---------- Welcome intro (first visit in a session) ---------- */
-#welcome { display: none; }
-.show-welcome #welcome {
-  display: grid;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  place-items: center;
-  background: var(--paper);
-  transition: opacity 0.9s ease, visibility 0.9s;
-}
-.show-welcome body { overflow: hidden; }
-#welcome.out { opacity: 0; visibility: hidden; }
-#welcome .w-word {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  font-size: clamp(3.4rem, 16vw, 11rem);
-  line-height: 1;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 1s ease, transform 1.2s var(--ease-out);
-}
-#welcome .w-sub {
-  opacity: 0;
-  transition: opacity 1s ease 0.5s;
-}
-#welcome.on .w-word { opacity: 1; transform: none; }
-#welcome.on .w-sub { opacity: 1; }
-
 /* Native <dialog> for the artwork detail view. */
 dialog.art-dialog::backdrop {
-  background: rgba(246, 243, 238, 0.94);
+  background: rgba(245, 238, 225, 0.95);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -250,4 +221,6 @@ dialog.art-dialog {
     transition-duration: 0.001ms !important;
   }
   .js .reveal:not(.in) .rise { opacity: 1; transform: none; }
+  .js .reveal:not(.in) .dl { stroke-dashoffset: 0; }
+  .js .reveal:not(.in) .fl { opacity: 1; }
 }
