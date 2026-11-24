@@ -14,10 +14,10 @@ import { asset } from "@/lib/paths";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 
-export function Landing({ nailDoor, nailPicks, paintingPicks }: { nailDoor: GalleryArtwork; nailPicks: GalleryArtwork[]; paintingPicks: PaintingPhoto[] }) {
+export function Landing({ nailDoor, paintingDoor, nailPicks, paintingPicks }: { nailDoor: GalleryArtwork; paintingDoor?: PaintingPhoto; nailPicks: GalleryArtwork[]; paintingPicks: PaintingPhoto[] }) {
   return (
     <main id="main" className="overflow-x-clip">
-      <Hero nailDoor={nailDoor} paintingDoor={paintingPicks.find((p) => p.withForough) ?? paintingPicks[0]} />
+      <Hero nailDoor={nailDoor} paintingDoor={paintingDoor} />
       <About />
       <Selected nailPicks={nailPicks} paintingPicks={paintingPicks} />
       <ContactSection

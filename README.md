@@ -56,3 +56,8 @@ This writes a wide (desktop) and a tall (phone) crop with a gentle cinematic gra
 | Instagram, booking link for nails | Nail inquiries use the contact form only |
 
 All sales-page wording follows her résumé. Don't add facts the résumé doesn't state.
+
+## Decorative painting photos and videos
+
+- Photos: 30 chosen from the shared Drive folder. Process with `python scripts/process_images.py "<folder>" --set paintings`, then add or edit entries in `src/data/paintings.ts` (only photos listed there are shown).
+- Videos: `python scripts/process_videos.py "<folder with .MOV files>"` writes compact silent MP4s and poster frames to `public/videos/`; edit the `CLIPS` list in the script and `src/data/videos.ts` to add or change clips.
