@@ -120,21 +120,22 @@ function About() {
   return (
     <section aria-labelledby="about-title" className="mx-auto max-w-6xl px-4 py-20 sm:px-8 sm:py-28">
       <Reveal className="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-        <div className="relative mx-auto w-full max-w-[360px]">
-          <div className="arch relative aspect-[4/5] overflow-hidden bg-sand">
+        {/* Simple rectangle: photo on a paper mat, with an offset gold frame behind it. */}
+        <div className="relative mx-auto w-[86%] max-w-[360px]">
+          <span aria-hidden className="absolute -bottom-4 -right-4 left-4 top-4 border border-gold sm:-bottom-5 sm:-right-5 sm:left-5 sm:top-5" />
+          <div className="paper-panel relative p-2.5">
             <img
-              src={asset(`/images/profile/${portrait.tall.name}-960.webp`)}
-              srcSet={portrait.tall.widths.map((w) => `${asset(`/images/profile/${portrait.tall.name}-${w}.webp`)} ${w}w`).join(", ")}
-              sizes="(min-width: 768px) 360px, 90vw"
-              width={portrait.tall.width}
-              height={portrait.tall.height}
-              alt={portrait.alt}
+              src={asset(`/images/profile/${portrait.about.name}-880.webp`)}
+              srcSet={portrait.about.widths.map((w) => `${asset(`/images/profile/${portrait.about.name}-${w}.webp`)} ${w}w`).join(", ")}
+              sizes="(min-width: 768px) 360px, 86vw"
+              width={portrait.about.width}
+              height={portrait.about.height}
+              alt={portrait.about.alt}
               loading="lazy"
-              className="h-full w-full object-cover object-[50%_25%]"
-              style={{ backgroundImage: `url(${portrait.tall.blur})`, backgroundSize: "cover" }}
+              className="block aspect-[4/5] h-auto w-full object-cover"
+              style={{ backgroundImage: `url(${portrait.about.blur})`, backgroundSize: "cover" }}
             />
           </div>
-          <ArchOutline />
         </div>
         <div>
           <p className="rise label text-gold">About</p>
