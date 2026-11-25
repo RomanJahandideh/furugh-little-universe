@@ -14,6 +14,8 @@ export function SiteNav() {
   const pathname = usePathname() ?? "/";
   const current = PATHS.find((p) => pathname.startsWith(`/${p.key}`))?.key ?? null;
   const contactHref = current === "nails" ? "#inquire" : "#contact";
+  // The home page opens on full-bleed photos, so the header starts white.
+  const onHero = pathname === "/";
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
 
@@ -28,7 +30,7 @@ export function SiteNav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background,box-shadow,color] duration-300 ${
-        solid || open ? "bg-paper/95 text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-md" : "text-ink"
+        solid || open ? "bg-paper/95 text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-md" : onHero ? "text-white" : "text-ink"
       }`}
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
@@ -50,7 +52,7 @@ export function SiteNav() {
             </li>
           ))}
           <li>
-            <a href={contactHref} className="btn btn-dark !min-h-10 !px-5 text-sm">
+            <a href={contactHref} className={`btn !min-h-10 !px-5 text-sm ${onHero && !solid ? "border border-white/80 text-white hover:bg-white hover:text-ink" : "btn-dark"}`}>
               Contact
             </a>
           </li>

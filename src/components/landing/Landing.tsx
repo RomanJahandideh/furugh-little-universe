@@ -28,44 +28,61 @@ export function Landing({ nailDoor, paintingDoor, nailPicks, paintingPicks }: { 
   );
 }
 
-/* ---------------- Hero: name and the two paths ---------------- */
+/* ---------------- Hero: full-screen split, one half per path ---------------- */
 function Hero({ nailDoor, paintingDoor }: { nailDoor: GalleryArtwork; paintingDoor?: PaintingPhoto }) {
   return (
-    <section className="mx-auto max-w-7xl px-5 pb-20 pt-[calc(var(--nav-h)+env(safe-area-inset-top)+3rem)] sm:px-8 sm:pt-[calc(var(--nav-h)+4.5rem)]">
-      <Reveal>
-        <p className="rise label text-ink-soft">Welcome</p>
-        <h1 className="rise font-display h-hero mt-4" style={v({ "--i": 1 })}>
+    <section aria-label="Choose a path" className="relative h-[100svh] min-h-[560px] bg-ink text-white">
+      <nav aria-label="Choose a path" className="group/split flex h-full flex-col md:flex-row">
+        {paintingDoor && (
+          <Half href="/decorative-painting/" n="01" title="Decorative Painting" sub="Walls, ceilings & ornament" art={paintingDoor} focus="50% 62%" />
+        )}
+        <span aria-hidden className="h-px w-full bg-white/40 md:h-full md:w-px" />
+        <Half href="/nails/" n="02" title="Nail Artistry" sub="Nail technician & artist" art={nailDoor} focus="50% 40%" />
+      </nav>
+
+      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/55 to-transparent md:h-72" />
+      {/* Name sits over the seam, above both halves. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 pt-[calc(var(--nav-h)+env(safe-area-inset-top)+1.25rem)] text-center md:pt-[calc(var(--nav-h)+2rem)]">
+        <p className="hero-in label text-white/80" style={v({ "--d": "0.2s" })}>
+          Welcome
+        </p>
+        <h1 className="hero-in font-display mt-2 px-4 text-[clamp(2.2rem,7vw,5.2rem)] leading-none [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]" style={v({ "--d": "0.35s" })}>
           Forough Mahmoudpour
         </h1>
-        <p className="rise mt-6 max-w-lg text-[1.1rem] text-ink-soft sm:text-lg" style={v({ "--i": 2 })}>
-          Decorative painting and nail artistry. Choose a path to see the work.
-        </p>
-      </Reveal>
-      <nav aria-label="Choose a path" className="mt-12 grid grid-cols-2 gap-3 sm:mt-16 sm:gap-6 lg:mt-12">
-        {paintingDoor && <Door href="/decorative-painting/" n="01" title="Decorative Painting" sub="Walls, ceilings & ornament" art={paintingDoor} i={3} />}
-        <Door href="/nails/" n="02" title="Nail Artistry" sub="Nail technician & artist" art={nailDoor} i={4} />
-      </nav>
+      </div>
     </section>
   );
 }
 
-function Door({ href, n, title, sub, art, i }: { href: string; n: string; title: string; sub: string; art: GalleryArtwork | PaintingPhoto; i: number }) {
+function Half({ href, n, title, sub, art, focus }: { href: string; n: string; title: string; sub: string; art: GalleryArtwork | PaintingPhoto; focus: string }) {
   return (
-    <Reveal>
-      <Link href={href} className="rise group block" style={v({ "--i": i })}>
-        <span className="block aspect-[4/5] overflow-hidden bg-sand lg:aspect-[3/2]">
-          <ArtImage art={art} sizes="(min-width: 1024px) 40vw, 46vw" priority decorative className="h-full object-cover object-[50%_65%] transition-transform duration-[1.2s] [transition-timing-function:var(--ease-out)] group-hover:scale-[1.03]" />
+    <Link
+      href={href}
+      className="group relative block min-h-0 flex-1 overflow-hidden transition-[flex-grow,opacity] duration-[900ms] [transition-timing-function:var(--ease-out)] md:hover:flex-[1.4] md:group-hover/split:[&:not(:hover)]:opacity-80"
+    >
+      <span aria-hidden className="hero-zoom absolute inset-0 block">
+        <ArtImage
+          art={art}
+          sizes="(min-width: 768px) 60vw, 100vw"
+          priority
+          decorative
+          className="h-full object-cover transition-transform duration-[1.6s] [transition-timing-function:var(--ease-out)] group-hover:scale-[1.04]"
+          style={{ objectPosition: focus }}
+        />
+      </span>
+      <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/35" />
+      <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-8 md:p-12">
+        <span className="hero-in block" style={v({ "--d": "0.55s" })}>
+          <span className="label block text-white/75">{n}</span>
+          <span className="font-display mt-2 block text-[2rem] leading-[1.02] sm:text-5xl lg:text-6xl">{title}</span>
+          <span className="mt-2 block text-[0.95rem] text-white/80 sm:text-base">{sub}</span>
         </span>
-        <span className="mt-4 flex items-baseline justify-between gap-3 border-b border-line pb-3">
-          <span>
-            <span className="label block text-ink-soft">{n}</span>
-            <span className="font-display mt-1 block text-[1.4rem] leading-tight sm:text-4xl">{title}</span>
-            <span className="mt-1 block text-[0.85rem] text-ink-soft sm:text-base">{sub}</span>
-          </span>
-          <span aria-hidden className="text-xl transition-transform group-hover:translate-x-1">&rarr;</span>
+        <span className="hero-in label flex shrink-0 items-center gap-3 pb-1 text-white" style={v({ "--d": "0.7s" })}>
+          <span className="hidden sm:inline">Enter</span>
+          <span aria-hidden className="block h-px w-8 bg-white transition-all duration-500 group-hover:w-14" />
         </span>
-      </Link>
-    </Reveal>
+      </span>
+    </Link>
   );
 }
 
