@@ -10,6 +10,11 @@
   --line: rgba(27, 26, 24, 0.12);
   --sand: #eeebe5;
   --accent: #9a7b4f;
+  --char: #171513;
+  --brass: #c4a06a;
+  --gold: #f2c14e;
+  --stage: #f2ede4;
+  --fg: var(--ink);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --nav-h: 64px;
   color-scheme: light;
@@ -23,7 +28,10 @@
   --color-line: var(--line);
   --color-sand: var(--sand);
   --color-accent: var(--accent);
-  --font-display: var(--font-cormorant), Georgia, serif;
+  --color-char: var(--char);
+  --color-brass: var(--brass);
+  --color-gold: var(--gold);
+  --font-display: var(--font-fraunces), Georgia, serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
 }
 
@@ -36,9 +44,12 @@ html {
   background: var(--paper);
 }
 
+html[data-fg="light"] { --fg: #f2ede4; }
+
 body {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--stage);
+  color: var(--fg);
+  transition: background-color 0.9s var(--ease-out), color 0.6s ease;
   font-family: var(--font-sans);
   font-size: 1.0625rem;
   line-height: 1.65;
@@ -55,8 +66,17 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+  letter-spacing: -0.02em;
+}
+/* The big, heavy display cut for numerals and chapter titles. */
+.font-black {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: "SOFT" 30, "WONK" 1, "opsz" 144;
+  letter-spacing: -0.035em;
+  line-height: 0.82;
 }
 
 .label {
@@ -120,6 +140,15 @@ body {
 /* Elevator floor display: the new number rolls up into place. */
 @keyframes floor-tick { from { opacity: 0; transform: translate3d(0, 60%, 0); } to { opacity: 1; transform: none; } }
 .floor-tick { display: inline-block; animation: floor-tick 0.5s var(--ease-out) both; }
+
+@keyframes verb-roll { from { transform: translate3d(0, 100%, 0); } to { transform: none; } }
+.verb-roll { animation: verb-roll 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) both; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin 9s linear infinite; }
+
+/* Sideways chapter titles, reading bottom-to-top. */
+.vertical { writing-mode: vertical-rl; transform: rotate(180deg); }
+@media (min-width: 768px) { .md\:vertical { writing-mode: vertical-rl; transform: rotate(180deg); } }
 
 /* Native <dialog> for detail views. */
 dialog.art-dialog::backdrop {

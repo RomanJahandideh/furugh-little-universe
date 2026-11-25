@@ -9,7 +9,7 @@ import { ContactForm } from "./ContactForm";
 /** Plain page title block at the top of each section of the site. */
 export function PageHeader({ kicker, title, intro }: { kicker: string; title: string; intro: string }) {
   return (
-    <header className="mx-auto max-w-7xl px-5 pb-10 pt-[calc(var(--nav-h)+env(safe-area-inset-top)+3.5rem)] sm:px-8 sm:pb-14 sm:pt-[calc(var(--nav-h)+5rem)]">
+    <header data-stage="#f2ede4" data-fg="dark" className="mx-auto max-w-7xl px-5 pb-10 pt-[calc(var(--nav-h)+env(safe-area-inset-top)+3.5rem)] sm:px-8 sm:pb-14 sm:pt-[calc(var(--nav-h)+5rem)]">
       <Reveal>
         <p className="rise label text-ink-soft">{kicker}</p>
         <h1 className="rise font-display h-hero mt-4" style={{ "--i": 1 } as React.CSSProperties}>
@@ -34,7 +34,7 @@ export function ContactSection({ id = "contact", title, intro, subject, initialM
 }) {
   const { email, phone, city } = siteConfig.contact;
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-20 border-t border-line">
+    <section id={id} aria-labelledby={`${id}-title`} data-stage="#f2ede4" data-fg="dark" className="scroll-mt-20 border-t border-line text-ink">
       <Reveal className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-[1fr_1.25fr] lg:gap-20">
         <div>
           <p className="rise label text-ink-soft">Contact</p>
@@ -76,7 +76,7 @@ export function ContactSection({ id = "contact", title, intro, subject, initialM
 
 export function Footer() {
   return (
-    <footer className="border-t border-line px-5 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-8">
+    <footer data-stage="#f2ede4" data-fg="dark" className="border-t border-line px-5 text-ink py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; {new Date().getFullYear()} Forough Mahmoudpour &middot; Vancouver, BC</p>
         <nav aria-label="Footer" className="flex gap-6">

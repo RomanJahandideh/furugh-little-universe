@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 import { MotionConfig } from "motion/react";
-import { ScrollGears } from "@/components/mechanics/ScrollGears";
 import { SiteNav } from "@/components/navigation/SiteNav";
+import { CursorBadge } from "@/components/stage/Cursor";
+import { StageController } from "@/components/stage/Stage";
 import { absoluteUrl } from "@/lib/paths";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
   display: "swap",
 });
 const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], display: "swap" });
@@ -37,7 +37,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#F7F6F3",
+  themeColor: "#1D4447",
 };
 
 // Runs before first paint so reveal animations only hide content when JS works.
@@ -45,7 +45,7 @@ const boot = "document.documentElement.classList.add('js')";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: boot }} />
       </head>
@@ -58,7 +58,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <MotionConfig reducedMotion="user">
           <SiteNav />
-          <ScrollGears />
+          <StageController />
+          <CursorBadge />
           {children}
         </MotionConfig>
       </body>

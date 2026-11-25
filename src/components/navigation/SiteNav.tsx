@@ -14,8 +14,6 @@ export function SiteNav() {
   const pathname = usePathname() ?? "/";
   const current = PATHS.find((p) => pathname.startsWith(`/${p.key}`))?.key ?? null;
   const contactHref = current === "nails" ? "#inquire" : "#contact";
-  // The home page opens on full-bleed photos, so the header starts white.
-  const onHero = pathname === "/";
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
 
@@ -29,13 +27,13 @@ export function SiteNav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background,box-shadow,color] duration-300 ${
-        solid || open ? "bg-paper/95 text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-md" : onHero ? "text-white" : "text-ink"
+      className={`fixed inset-x-0 top-0 z-50 text-[var(--fg)] transition-[background,color] duration-500 ${
+        solid || open ? "bg-[color-mix(in_srgb,var(--stage)_88%,transparent)] backdrop-blur-md" : ""
       }`}
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       <nav aria-label="Main" className="mx-auto flex h-[var(--nav-h)] max-w-7xl items-center justify-between gap-4 px-5 sm:px-9">
-        <Link href="/" className="font-display flex min-h-11 items-center text-[1.5rem]">
+        <Link href="/" className="font-black flex min-h-11 items-center text-[1.6rem]">
           Forough
         </Link>
 
@@ -52,7 +50,7 @@ export function SiteNav() {
             </li>
           ))}
           <li>
-            <a href={contactHref} className={`btn !min-h-10 !px-5 text-sm ${onHero && !solid ? "border border-white/80 text-white hover:bg-white hover:text-ink" : "btn-dark"}`}>
+            <a href={contactHref} className="btn !min-h-10 bg-gold !px-5 text-sm text-char hover:brightness-105">
               Contact
             </a>
           </li>
@@ -74,13 +72,13 @@ export function SiteNav() {
       </nav>
 
       {open && (
-        <ul id="mobile-menu" className="border-t border-line bg-paper px-5 pb-6 pt-2 md:hidden">
+        <ul id="mobile-menu" className="border-t border-current/15 px-5 pb-6 pt-2 md:hidden">
           <li>
-            <Link href="/" onClick={() => setOpen(false)} className="font-display flex min-h-12 items-center border-b border-line text-2xl">Home</Link>
+            <Link href="/" onClick={() => setOpen(false)} className="font-display flex min-h-12 items-center border-b border-current/15 text-2xl">Home</Link>
           </li>
           {PATHS.map((p) => (
             <li key={p.key}>
-              <Link href={p.href} onClick={() => setOpen(false)} className="font-display flex min-h-12 items-center border-b border-line text-2xl">{p.label}</Link>
+              <Link href={p.href} onClick={() => setOpen(false)} className="font-display flex min-h-12 items-center border-b border-current/15 text-2xl">{p.label}</Link>
             </li>
           ))}
           <li>
