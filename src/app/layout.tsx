@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { MotionConfig } from "motion/react";
 import { SiteNav } from "@/components/navigation/SiteNav";
-import { OrnamentDefs } from "@/components/ornament/Ornaments";
 import { absoluteUrl } from "@/lib/paths";
 import "./globals.css";
 
@@ -37,7 +36,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#1C3564",
+  themeColor: "#F7F6F3",
 };
 
 // Runs before first paint so reveal animations only hide content when JS works.
@@ -50,7 +49,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: boot }} />
       </head>
       <body>
-        <OrnamentDefs />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-paper"

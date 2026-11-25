@@ -20,14 +20,14 @@ export function NailContact({ chosen, onClear }: { chosen: GalleryArtwork | null
       aside={
         <>
           {chosen && (
-            <div className="mt-7 flex max-w-md items-center gap-4 rounded-md border border-[#e2c378]/40 bg-white/5 p-3">
-              <div className="w-16 shrink-0 overflow-hidden rounded-sm">
+            <div className="mt-7 flex max-w-md items-center gap-4 border border-line bg-panel p-3">
+              <div className="w-16 shrink-0 overflow-hidden">
                 <ArtImage art={chosen} sizes="64px" decorative />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="label text-gold-light/80">You&rsquo;re asking about</p>
+                <p className="label text-ink-soft">You&rsquo;re asking about</p>
                 <p className="truncate font-medium">{ref}</p>
-                <button type="button" onClick={onClear} className="min-h-11 text-sm underline underline-offset-4 opacity-80">
+                <button type="button" onClick={onClear} className="min-h-11 text-sm text-ink-soft underline underline-offset-4">
                   Clear
                 </button>
               </div>
@@ -36,12 +36,12 @@ export function NailContact({ chosen, onClear }: { chosen: GalleryArtwork | null
           {(instagramUrl || bookingUrl) && (
             <div className="mt-7 flex flex-wrap gap-3">
               {instagramUrl && (
-                <a className="btn btn-gold" href={instagramUrl} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn-dark" href={instagramUrl} target="_blank" rel="noopener noreferrer">
                   Instagram{instagramHandle ? ` ${instagramHandle}` : ""}
                 </a>
               )}
               {bookingUrl && (
-                <a className="btn btn-ghost-light" href={bookingUrl} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn-outline" href={bookingUrl} target="_blank" rel="noopener noreferrer">
                   Request an appointment
                 </a>
               )}

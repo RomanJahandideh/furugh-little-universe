@@ -48,12 +48,12 @@ export function ContactForm({
 
   const field = dark
     ? "w-full rounded-md border border-[#e2c378]/40 bg-white/8 px-4 py-3 text-white placeholder:text-white/55 focus:border-[#e2c378] focus:outline-none"
-    : "w-full rounded-md border border-line bg-panel px-4 py-3 placeholder:text-ink-soft/70 focus:border-ink focus:outline-none";
+    : "w-full border border-line bg-panel px-4 py-3 placeholder:text-ink-soft/70 focus:border-ink focus:outline-none";
   const lbl = `mb-1.5 block text-sm font-medium ${dark ? "text-white/85" : ""}`;
 
   if (status.kind === "sent") {
     return (
-      <div role="status" className={`rounded-2xl p-6 ${dark ? "bg-white/12" : "card"}`}>
+      <div role="status" className={`border border-line p-6 ${dark ? "" : "bg-panel"}`}>
         <p className="font-display text-2xl">Thank you! Your message is on its way.</p>
         <p className={`mt-2 ${dark ? "text-white/80" : "text-ink-soft"}`}>Forough will reply to the email address you entered.</p>
         <button type="button" className="mt-4 text-sm font-semibold underline underline-offset-4" onClick={() => setStatus({ kind: "idle" })}>
@@ -87,7 +87,7 @@ export function ContactForm({
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
       <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center">
-        <button type="submit" disabled={status.kind === "sending"} className={`btn ${dark ? "btn-gold" : "btn-dark"} disabled:opacity-60`}>
+        <button type="submit" disabled={status.kind === "sending"} className="btn btn-dark disabled:opacity-60">
           {status.kind === "sending" ? "Sending…" : "Send message"}
         </button>
         <p aria-live="polite" className={`text-sm ${dark ? "text-white/90" : "text-ink-soft"}`}>

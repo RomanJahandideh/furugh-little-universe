@@ -26,7 +26,7 @@ export function GalleryGrid({ list, onOpen }: { list: GalleryArtwork[]; onOpen: 
               aria-label={`Design No. ${a.number}: ${a.title}. Open details`}
               className="group block w-full text-left"
             >
-              <span className="block overflow-hidden rounded-[14px] bg-sand">
+              <span className="block overflow-hidden bg-sand">
                 <ArtImage
                   art={a}
                   sizes="(min-width: 1024px) 24vw, (min-width: 640px) 32vw, 48vw"

@@ -54,10 +54,10 @@ export function PaintingLightbox({
       {p && (
         <div className="mx-auto flex min-h-full max-w-6xl flex-col px-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6">
           <div className="flex items-center justify-between py-2">
-            <p className="label text-gold">
+            <p className="label text-ink-soft">
               {index! + 1} / {list.length}
             </p>
-            <button type="button" onClick={onClose} className="grid h-12 w-12 place-items-center rounded-full border border-line bg-panel text-2xl" aria-label="Close">
+            <button type="button" onClick={onClose} className="grid h-12 w-12 place-items-center text-3xl" aria-label="Close">
               &times;
             </button>
           </div>
@@ -74,11 +74,11 @@ export function PaintingLightbox({
                 if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) go(dx < 0 ? 1 : -1);
               }}
             >
-              <div className="paper-panel mx-auto w-fit max-w-full p-2">
+              <div className="mx-auto w-fit max-w-full">
                 <ArtImage key={p.id} art={p} sizes="(min-width: 1024px) 60vw, 100vw" priority fill={false} className="h-auto max-h-[72dvh] w-auto max-w-full" />
               </div>
             </div>
-            <div className="paper-panel p-6 sm:p-8">
+            <div className="border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
               <h2 id="painting-title" className="font-display h-card">{p.title}</h2>
               {p.caption && <p className="mt-3 text-[1.05rem]">{p.caption}</p>}
               <p className="mt-3 text-sm text-ink-soft">{p.alt}</p>

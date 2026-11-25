@@ -45,7 +45,7 @@ export function LoopVideo({ video, className = "" }: { video: PaintingVideo; cla
   };
 
   return (
-    <div className={`relative overflow-hidden bg-lapis-deep ${className}`}>
+    <div className={`relative overflow-hidden bg-sand ${className}`}>
       <video
         ref={ref}
         className="h-full w-full object-cover"
@@ -65,7 +65,7 @@ export function LoopVideo({ video, className = "" }: { video: PaintingVideo; cla
         type="button"
         onClick={toggle}
         aria-label={playing ? `Pause video: ${video.title}` : `Play video: ${video.title}`}
-        className="absolute bottom-3 right-3 grid h-11 w-11 place-items-center rounded-full bg-[#13254a]/70 text-[#f4ecdc] backdrop-blur transition-colors hover:bg-[#13254a]"
+        className="absolute bottom-3 right-3 grid h-11 w-11 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-colors hover:bg-black/70"
       >
         {playing ? (
           <svg viewBox="0 0 20 20" className="h-4 w-4" aria-hidden><rect x="4" y="3" width="4" height="14" rx="1" fill="currentColor" /><rect x="12" y="3" width="4" height="14" rx="1" fill="currentColor" /></svg>

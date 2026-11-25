@@ -90,10 +90,10 @@ export function ArtworkDialog({
       {art && (
         <div className="mx-auto flex min-h-full max-w-5xl flex-col px-3 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6">
           <div className="sticky top-0 z-10 flex items-center justify-between gap-3 py-2">
-            <p className="label rounded-full border border-line bg-panel px-3 py-1.5">
+            <p className="label text-ink-soft">
               No. {no} <span className="text-ink-soft">/ {String(list.length).padStart(2, "0")}</span>
             </p>
-            <button type="button" onClick={onClose} className="grid h-12 w-12 place-items-center rounded-full border border-line bg-panel text-2xl" aria-label="Close and return to the gallery">
+            <button type="button" onClick={onClose} className="grid h-12 w-12 place-items-center text-3xl" aria-label="Close and return to the gallery">
               &times;
             </button>
           </div>
@@ -125,20 +125,20 @@ export function ArtworkDialog({
                   animate="center"
                   exit="exit"
                   transition={{ type: "spring", stiffness: 320, damping: 32 }}
-                  className="mx-auto w-fit max-w-full overflow-hidden rounded-[22px] border border-line bg-panel p-1.5"
+                  className="mx-auto w-fit max-w-full overflow-hidden"
                 >
                   <ArtImage
                     art={art}
                     sizes="(min-width: 1024px) 58vw, 100vw"
                     priority
                     fill={false}
-                    className="h-auto max-h-[68dvh] w-auto max-w-full rounded-[16px]"
+                    className="h-auto max-h-[68dvh] w-auto max-w-full"
                   />
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="rounded-[28px] border border-line bg-panel p-5 sm:p-7">
+            <div className="border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
               <h2 id="art-title" className="font-display text-[clamp(1.8rem,6vw,2.6rem)] leading-none">
                 {art.title}
               </h2>

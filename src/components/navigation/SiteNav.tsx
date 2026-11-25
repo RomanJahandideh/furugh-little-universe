@@ -24,18 +24,16 @@ export function SiteNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Every page opens on a lapis band, so the header starts light-on-blue.
-  const light = !solid && !open;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background,box-shadow,color] duration-300 ${
-        light ? "text-[#f4ecdc]" : "bg-paper/95 text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-md"
+        solid || open ? "bg-paper/95 text-ink shadow-[0_1px_0_var(--line)] backdrop-blur-md" : "text-ink"
       }`}
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       <nav aria-label="Main" className="mx-auto flex h-[var(--nav-h)] max-w-7xl items-center justify-between gap-4 px-5 sm:px-9">
-        <Link href="/" className="font-display flex min-h-11 items-center text-[1.55rem] font-semibold">
+        <Link href="/" className="font-display flex min-h-11 items-center text-[1.5rem]">
           Forough
         </Link>
 
@@ -52,7 +50,7 @@ export function SiteNav() {
             </li>
           ))}
           <li>
-            <a href={contactHref} className={`btn !min-h-10 !px-5 text-sm ${light ? "btn-gold" : "btn-dark"}`}>
+            <a href={contactHref} className="btn btn-dark !min-h-10 !px-5 text-sm">
               Contact
             </a>
           </li>
