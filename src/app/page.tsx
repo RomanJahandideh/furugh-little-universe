@@ -1,16 +1,16 @@
 import { Landing } from "@/components/landing/Landing";
-import { getArtworks } from "@/lib/artworks";
 import { getPaintings } from "@/lib/paintings";
 
 export default function HomePage() {
-  const nails = getArtworks();
-  const featuredNails = nails.filter((a) => a.featured);
   const paintings = getPaintings();
+  const works = paintings.filter((p) => p.group !== "studio");
+  // Selected work: featured pieces first, skipping the ones already in the Elevator.
+  const floorIds = ["img-e5618", "img-8277", "img-9549", "img-0938", "img-e8289"];
+  const picks = [...works.filter((p) => p.featured), ...works.filter((p) => !p.featured)].filter((p) => !floorIds.includes(p.id)).slice(0, 6);
   return (
     <Landing
-      nailPicks={featuredNails}
-      paintingPicks={paintings.filter((p) => p.featured && p.group !== "studio")}
-      floors={["img-e5618", "img-8277", "img-9549", "img-0938", "img-e8289"].map((id) => paintings.find((p) => p.id === id)).filter((p) => p !== undefined)}
+      paintingPicks={picks}
+      floors={floorIds.map((id) => paintings.find((p) => p.id === id)).filter((p) => p !== undefined)}
     />
   );
 }
