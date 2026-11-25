@@ -10,7 +10,7 @@ export const siteConfig = {
   contact: {
     email: "furughmp77@gmail.com" as string | null,
     phone: "+1 236-234-1377" as string | null,
-    city: "Surrey, BC" as string | null,
+    city: "Vancouver, BC" as string | null,
   },
 
   /**

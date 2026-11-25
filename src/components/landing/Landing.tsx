@@ -64,7 +64,7 @@ function Hero() {
       <motion.div style={{ opacity: fade }} className="relative mx-auto flex h-full max-w-7xl items-end px-5 pb-10 sm:px-8 md:items-center md:pb-0">
         <div className="max-w-xl text-white">
           <p className="hero-in label text-white/80" style={v({ "--d": "0.2s" })}>
-            Welcome &middot; Surrey, BC
+            Welcome &middot; Vancouver, BC
           </p>
           <h1 className="hero-in font-display mt-3 text-[clamp(3rem,11vw,7rem)] leading-[0.98] md:text-[clamp(3rem,5.2vw,4.8rem)]" style={v({ "--d": "0.35s" })}>
             Forough
@@ -122,7 +122,7 @@ function About() {
             Hello, and welcome.
           </h2>
           <p className="rise mt-6 max-w-lg text-[1.1rem] leading-relaxed text-ink-soft" style={v({ "--i": 2 })}>
-            I&rsquo;m Forough, a decorative painter based in Surrey, BC. For me, it&rsquo;s all in the details: the curl of a carved scroll, the edge of a sheet of gold leaf, a single petal on a painted branch. And colour is where every wall begins. I mix and layer each tone by hand, from soft plaster finishes to deep teal, warm gold and blossom pink, until it feels right in the room.
+            I&rsquo;m Forough, a decorative painter based in Vancouver, BC. For me, it&rsquo;s all in the details: the curl of a carved scroll, the edge of a sheet of gold leaf, a single petal on a painted branch. And colour is where every wall begins. I mix and layer each tone by hand, from soft plaster finishes to deep teal, warm gold and blossom pink, until it feels right in the room.
           </p>
           <div className="rise mt-8 flex flex-wrap gap-3" style={v({ "--i": 3 })}>
             <Link href="/decorative-painting/" className="btn btn-dark">See the painting work</Link>

@@ -4,7 +4,7 @@ import { getPaintings } from "@/lib/paintings";
 import { absoluteUrl } from "@/lib/paths";
 
 const description =
-  "Decorative wall painting by Forough Mahmoudpour: hand-painted murals and ornament for walls and interiors. Based in Surrey, BC.";
+  "Decorative wall painting by Forough Mahmoudpour: hand-painted murals and ornament for walls and interiors. Based in Vancouver, BC.";
 
 export const metadata: Metadata = {
   title: "Decorative Painting | Forough Mahmoudpour",

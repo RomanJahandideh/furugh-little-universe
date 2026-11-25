@@ -15,7 +15,7 @@ const cormorant = Cormorant_Garamond({
 const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], display: "swap" });
 
 const description =
-  "Forough Mahmoudpour: decorative wall painting and nail artistry. Choose a path to see her murals and ornament, or her hand-painted nail designs. Based in Surrey, BC.";
+  "Forough Mahmoudpour: decorative wall painting and nail artistry. Choose a path to see her murals and ornament, or her hand-painted nail designs. Based in Vancouver, BC.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),

@@ -78,7 +78,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line px-5 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
-        <p>&copy; {new Date().getFullYear()} Forough Mahmoudpour &middot; Surrey, BC</p>
+        <p>&copy; {new Date().getFullYear()} Forough Mahmoudpour &middot; Vancouver, BC</p>
         <nav aria-label="Footer" className="flex gap-6">
           <Link href="/" className="hover:text-ink">Home</Link>
           <Link href="/decorative-painting/" className="hover:text-ink">Decorative painting</Link>
