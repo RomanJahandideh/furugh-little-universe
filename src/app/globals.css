@@ -117,6 +117,10 @@ body {
 @keyframes push-in { from { transform: scale(1.08); } to { transform: scale(1); } }
 .push-in { animation: push-in 9s var(--ease-out) both; }
 
+/* Elevator floor display: the new number rolls up into place. */
+@keyframes floor-tick { from { opacity: 0; transform: translate3d(0, 60%, 0); } to { opacity: 1; transform: none; } }
+.floor-tick { display: inline-block; animation: floor-tick 0.5s var(--ease-out) both; }
+
 /* Native <dialog> for detail views. */
 dialog.art-dialog::backdrop {
   background: rgba(247, 246, 243, 0.97);

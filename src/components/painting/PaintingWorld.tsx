@@ -7,6 +7,7 @@ import { ArtImage } from "@/components/gallery/ArtImage";
 import { paintingGroups } from "@/data/paintings";
 import { paintingVideos } from "@/data/videos";
 import type { PaintingPhoto } from "@/lib/paintings";
+import { PullUp } from "@/components/mechanics/PullUp";
 import { LoopVideo } from "./LoopVideo";
 import { PaintingLightbox } from "./PaintingLightbox";
 
@@ -105,9 +106,9 @@ export function PaintingWorld({ paintings }: { paintings: PaintingPhoto[] }) {
                   {items.map((p, i) => (
                     <Reveal as="li" key={p.id} className="mb-4 break-inside-avoid sm:mb-6">
                       <button type="button" onClick={() => openPhoto(p)} className="rise group block w-full text-left" style={v({ "--i": i % 3 })} aria-label={`Open photo: ${p.title}`}>
-                        <span className="block overflow-hidden bg-sand">
+                        <PullUp className="bg-sand">
                           <ArtImage art={p} sizes="(min-width: 1024px) 31vw, 46vw" decorative className="transition-transform duration-700 group-hover:scale-[1.03]" />
-                        </span>
+                        </PullUp>
                         <span className="font-display mt-2 block text-lg leading-tight sm:text-xl">{p.title}</span>
                         {p.caption && <span className="mt-0.5 block text-sm text-ink-soft">{p.caption}</span>}
                       </button>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { MotionConfig } from "motion/react";
+import { ScrollGears } from "@/components/mechanics/ScrollGears";
 import { SiteNav } from "@/components/navigation/SiteNav";
 import { absoluteUrl } from "@/lib/paths";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <MotionConfig reducedMotion="user">
           <SiteNav />
+          <ScrollGears />
           {children}
         </MotionConfig>
       </body>

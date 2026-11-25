@@ -6,6 +6,8 @@ import { useRef, type CSSProperties } from "react";
 import { Reveal } from "@/components/animations/Reveal";
 import { ContactSection, Footer } from "@/components/common/Chrome";
 import { ArtImage } from "@/components/gallery/ArtImage";
+import { Elevator } from "@/components/mechanics/Elevator";
+import { PullUp } from "@/components/mechanics/PullUp";
 import { portrait } from "@/data/portrait";
 import type { GalleryArtwork } from "@/lib/artworks";
 import type { PaintingPhoto } from "@/lib/paintings";
@@ -13,11 +15,12 @@ import { asset } from "@/lib/paths";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 
-export function Landing({ nailPicks, paintingPicks }: { nailPicks: GalleryArtwork[]; paintingPicks: PaintingPhoto[] }) {
+export function Landing({ nailPicks, paintingPicks, floors }: { nailPicks: GalleryArtwork[]; paintingPicks: PaintingPhoto[]; floors: PaintingPhoto[] }) {
   return (
     <main id="main" className="overflow-x-clip">
       <Hero />
       <About />
+      {floors.length > 1 && <Elevator floors={floors} />}
       <Selected nailPicks={nailPicks} paintingPicks={paintingPicks} />
       <ContactSection
         title="Let’s talk about your project."
@@ -152,9 +155,9 @@ function Selected({ nailPicks, paintingPicks }: { nailPicks: GalleryArtwork[]; p
           {items.map((it, i) => (
             <Reveal as="li" key={it.key}>
               <Link href={it.href} className="rise group block" style={v({ "--i": i % 3 })}>
-                <span className="block overflow-hidden bg-sand">
+                <PullUp className="bg-sand">
                   <ArtImage art={it.art} sizes="(min-width: 1024px) 30vw, 46vw" decorative className="aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-                </span>
+                </PullUp>
                 <span className="label mt-3 block text-ink-soft">{it.label}</span>
                 <span className="font-display mt-1 block text-xl">{it.title}</span>
               </Link>
