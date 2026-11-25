@@ -122,11 +122,10 @@ function About() {
             Hello, and welcome.
           </h2>
           <p className="rise mt-6 max-w-lg text-[1.1rem] leading-relaxed text-ink-soft" style={v({ "--i": 2 })}>
-            I&rsquo;m Forough, a painter based in Surrey, BC. On walls and ceilings, I bring colour, gold leaf and ornament to interiors. At the nail desk, I paint tiny works of art. Thank you for stopping by.
+            I&rsquo;m Forough, a decorative painter based in Surrey, BC. For me, it&rsquo;s all in the details: the curl of a carved scroll, the edge of a sheet of gold leaf, a single petal on a painted branch. And colour is where every wall begins. I mix and layer each tone by hand, from soft plaster finishes to deep teal, warm gold and blossom pink, until it feels right in the room.
           </p>
           <div className="rise mt-8 flex flex-wrap gap-3" style={v({ "--i": 3 })}>
-            <Link href="/decorative-painting/" className="btn btn-dark">Decorative painting</Link>
-            <Link href="/nails/" className="btn btn-outline">Nail artistry</Link>
+            <Link href="/decorative-painting/" className="btn btn-dark">See the painting work</Link>
           </div>
         </div>
       </Reveal>
