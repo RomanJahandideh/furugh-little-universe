@@ -24,9 +24,9 @@ export function Landing({ paintingPicks, floors }: { paintingPicks: PaintingPhot
   return (
     <main id="main" className="overflow-x-clip">
       <Hero />
-      {floors.length > 1 && <Elevator floors={floors} />}
-      <ProcessVideos linkToPainting />
       <About />
+      <ProcessVideos linkToPainting />
+      {floors.length > 1 && <Elevator floors={floors} />}
       <Selected paintingPicks={paintingPicks} />
       <ContactSection
         title="Let’s talk about your project."
