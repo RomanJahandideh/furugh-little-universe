@@ -76,7 +76,7 @@ export function PaintingWorld({ paintings }: { paintings: PaintingPhoto[] }) {
           <ul className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0">
             {process.map((x, i) => (
               <li key={x.id} className="rise w-[72vw] shrink-0 snap-center sm:w-auto" style={v({ "--i": i + 2 })}>
-                <LoopVideo video={x} className="aspect-[9/16]" />
+                <LoopVideo video={x} className="aspect-[9/16] rounded-t-[999px]" />
                 <p className="font-display mt-4 text-2xl">{x.title}</p>
                 <p className="mt-1 text-[0.95rem] text-ink-soft">{x.caption}</p>
               </li>

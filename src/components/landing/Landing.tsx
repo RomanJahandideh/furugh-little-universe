@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import type { CSSProperties } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef, type CSSProperties } from "react";
 import { Reveal } from "@/components/animations/Reveal";
 import { ContactSection, Footer } from "@/components/common/Chrome";
 import { ArtImage } from "@/components/gallery/ArtImage";
@@ -12,10 +13,10 @@ import { asset } from "@/lib/paths";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 
-export function Landing({ nailDoor, paintingDoor, nailPicks, paintingPicks }: { nailDoor: GalleryArtwork; paintingDoor?: PaintingPhoto; nailPicks: GalleryArtwork[]; paintingPicks: PaintingPhoto[] }) {
+export function Landing({ nailPicks, paintingPicks }: { nailPicks: GalleryArtwork[]; paintingPicks: PaintingPhoto[] }) {
   return (
     <main id="main" className="overflow-x-clip">
-      <Hero nailDoor={nailDoor} paintingDoor={paintingDoor} />
+      <Hero />
       <About />
       <Selected nailPicks={nailPicks} paintingPicks={paintingPicks} />
       <ContactSection
@@ -28,60 +29,71 @@ export function Landing({ nailDoor, paintingDoor, nailPicks, paintingPicks }: { 
   );
 }
 
-/* ---------------- Hero: full-screen split, one half per path ---------------- */
-function Hero({ nailDoor, paintingDoor }: { nailDoor: GalleryArtwork; paintingDoor?: PaintingPhoto }) {
-  return (
-    <section aria-label="Choose a path" className="relative h-[100svh] min-h-[560px] bg-ink text-white">
-      <nav aria-label="Choose a path" className="group/split flex h-full flex-col md:flex-row">
-        {paintingDoor && (
-          <Half href="/decorative-painting/" n="01" title="Decorative Painting" sub="Walls, ceilings & ornament" art={paintingDoor} focus="50% 62%" />
-        )}
-        <span aria-hidden className="h-px w-full bg-white/40 md:h-full md:w-px" />
-        <Half href="/nails/" n="02" title="Nail Artistry" sub="Nail technician & artist" art={nailDoor} focus="50% 40%" />
-      </nav>
+/* ---------------- Hero: cinematic autumn portrait with the two paths ---------------- */
+const srcset = (p: { name: string; widths: number[] }) =>
+  p.widths.map((w) => `${asset(`/images/profile/${p.name}-${w}.webp`)} ${w}w`).join(", ");
 
-      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-black/55 to-transparent md:h-72" />
-      {/* Name sits over the seam, above both halves. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 pt-[calc(var(--nav-h)+env(safe-area-inset-top)+1.25rem)] text-center md:pt-[calc(var(--nav-h)+2rem)]">
-        <p className="hero-in label text-white/80" style={v({ "--d": "0.2s" })}>
-          Welcome
-        </p>
-        <h1 className="hero-in font-display mt-2 px-4 text-[clamp(2.2rem,7vw,5.2rem)] leading-none [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]" style={v({ "--d": "0.35s" })}>
-          Forough Mahmoudpour
-        </h1>
-      </div>
+function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  return (
+    <section ref={ref} className="relative h-[100svh] min-h-[600px] overflow-hidden bg-[#2a211b]">
+      <motion.div style={{ y }} className="absolute inset-0">
+        <picture>
+          <source media="(min-width: 768px)" srcSet={srcset(portrait.wide)} sizes="100vw" />
+          <img
+            src={asset(`/images/profile/${portrait.tall.name}-960.webp`)}
+            srcSet={srcset(portrait.tall)}
+            sizes="100vw"
+            width={portrait.tall.width}
+            height={portrait.tall.height}
+            alt={portrait.alt}
+            fetchPriority="high"
+            className="push-in h-full w-full object-cover object-[50%_30%] md:object-[82%_40%]"
+            style={{ backgroundImage: `url(${portrait.tall.blur})`, backgroundSize: "cover" }}
+          />
+        </picture>
+      </motion.div>
+      {/* Shading: bottom on phones, left side on larger screens, top for the menu. */}
+      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(14,11,9,0.9)_0%,rgba(14,11,9,0.5)_42%,rgba(14,11,9,0)_66%)] md:bg-[linear-gradient(to_right,rgba(14,11,9,0.82)_0%,rgba(14,11,9,0.5)_38%,rgba(14,11,9,0)_64%)]" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/40 to-transparent" />
+
+      <motion.div style={{ opacity: fade }} className="relative mx-auto flex h-full max-w-7xl items-end px-5 pb-10 sm:px-8 md:items-center md:pb-0">
+        <div className="max-w-xl text-white">
+          <p className="hero-in label text-white/80" style={v({ "--d": "0.2s" })}>
+            Welcome &middot; Surrey, BC
+          </p>
+          <h1 className="hero-in font-display mt-3 text-[clamp(3rem,11vw,7rem)] leading-[0.98] md:text-[clamp(3rem,5.2vw,4.8rem)]" style={v({ "--d": "0.35s" })}>
+            Forough
+            <span className="block">Mahmoudpour</span>
+          </h1>
+          <p className="hero-in mt-4 max-w-md text-[1.1rem] leading-snug text-white/85 sm:text-[1.25rem]" style={v({ "--d": "0.5s" })}>
+            Decorative painting and nail artistry. Choose a path:
+          </p>
+          <nav aria-label="Choose a path" className="hero-in mt-7 grid gap-3 sm:max-w-xl sm:grid-cols-2" style={v({ "--d": "0.65s" })}>
+            <PathLink href="/decorative-painting/" n="01" title="Decorative Painting" />
+            <PathLink href="/nails/" n="02" title="Nail Artistry" />
+          </nav>
+        </div>
+      </motion.div>
     </section>
   );
 }
 
-function Half({ href, n, title, sub, art, focus }: { href: string; n: string; title: string; sub: string; art: GalleryArtwork | PaintingPhoto; focus: string }) {
+function PathLink({ href, n, title }: { href: string; n: string; title: string }) {
   return (
     <Link
       href={href}
-      className="group relative block min-h-0 flex-1 overflow-hidden transition-[flex-grow,opacity] duration-[900ms] [transition-timing-function:var(--ease-out)] md:hover:flex-[1.4] md:group-hover/split:[&:not(:hover)]:opacity-80"
+      className="group flex min-h-[64px] items-center justify-between gap-4 border border-white/60 bg-black/15 px-5 py-3 backdrop-blur-sm transition-colors duration-300 hover:bg-white hover:text-ink"
     >
-      <span aria-hidden className="hero-zoom absolute inset-0 block">
-        <ArtImage
-          art={art}
-          sizes="(min-width: 768px) 60vw, 100vw"
-          priority
-          decorative
-          className="h-full object-cover transition-transform duration-[1.6s] [transition-timing-function:var(--ease-out)] group-hover:scale-[1.04]"
-          style={{ objectPosition: focus }}
-        />
+      <span>
+        <span className="label block opacity-70">{n}</span>
+        <span className="font-display block whitespace-nowrap text-[1.4rem] leading-tight">{title}</span>
       </span>
-      <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/35" />
-      <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-8 md:p-12">
-        <span className="hero-in block" style={v({ "--d": "0.55s" })}>
-          <span className="label block text-white/75">{n}</span>
-          <span className="font-display mt-2 block text-[2rem] leading-[1.02] sm:text-5xl lg:text-6xl">{title}</span>
-          <span className="mt-2 block text-[0.95rem] text-white/80 sm:text-base">{sub}</span>
-        </span>
-        <span className="hero-in label flex shrink-0 items-center gap-3 pb-1 text-white" style={v({ "--d": "0.7s" })}>
-          <span className="hidden sm:inline">Enter</span>
-          <span aria-hidden className="block h-px w-8 bg-white transition-all duration-500 group-hover:w-14" />
-        </span>
-      </span>
+      <span aria-hidden className="text-xl transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
     </Link>
   );
 }

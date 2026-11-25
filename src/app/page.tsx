@@ -8,9 +8,7 @@ export default function HomePage() {
   const paintings = getPaintings();
   return (
     <Landing
-      nailDoor={nails.find((a) => a.id === "img-1486") ?? featuredNails[0]}
-      paintingDoor={paintings.find((p) => p.id === "img-6646") ?? paintings[0]}
-      nailPicks={featuredNails.filter((a) => a.id !== "img-1486")}
+      nailPicks={featuredNails}
       paintingPicks={paintings.filter((p) => p.featured && p.group !== "studio")}
     />
   );
