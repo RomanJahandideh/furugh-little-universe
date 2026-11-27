@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Nail Artistry | Forough Mahmoudpour",
   description,
   alternates: { canonical: absoluteUrl("/nails/") },
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Nail Artistry | Forough Mahmoudpour",
     description,

@@ -28,9 +28,10 @@ export function Landing({ paintingPicks, floors }: { paintingPicks: PaintingPhot
       <ProcessVideos linkToPainting />
       {floors.length > 1 && <Elevator floors={floors} />}
       <Selected paintingPicks={paintingPicks} />
+      <PrepCook />
       <ContactSection
         title="Let’s talk about your project."
-        intro="A wall or ceiling that needs painting? Tell Forough about the space, and your message goes straight to her inbox."
+        intro="A wall or ceiling that needs painting, or a prep cook for your kitchen? Send a message and it goes straight to Forough's inbox."
         subject="New message from furugh.com"
       />
       <Footer />
@@ -166,6 +167,79 @@ function Selected({ paintingPicks }: { paintingPicks: PaintingPhoto[] }) {
             </li>
           ))}
         </ul>
+      </div>
+    </Stage>
+  );
+}
+
+/* ---------------- Prep cook ---------------- */
+const PREP_NEEDS = [
+  {
+    t: "FOODSAFE Level 1",
+    d: "BC\u2019s Food Premises Regulation requires a FOODSAFE Level 1 (or equivalent) holder on site, and many kitchens ask it of every cook.",
+    has: true,
+  },
+  {
+    t: "Safe food handling",
+    d: "Keeping cold food at 4\u00b0C or below and hot food at 60\u00b0C or above, preventing cross-contamination, and labelling, dating and rotating stock first in, first out.",
+    has: true,
+  },
+  {
+    t: "Prep and mise en place",
+    d: "Washing, peeling and cutting vegetables, weighing and measuring ingredients, portioning, and following recipes and the chef\u2019s prep list.",
+  },
+  {
+    t: "A clean, organised station",
+    d: "Cleaning and sanitising surfaces, tools and equipment, and unpacking and storing deliveries.",
+  },
+  {
+    t: "Pace and teamwork",
+    d: "Working steadily in a hot, busy kitchen, with early, split or weekend shifts.",
+  },
+];
+
+function PrepCook() {
+  return (
+    <Stage tone="slate" id="prep" aria-labelledby="prep-title" className="scroll-mt-[var(--nav-h)]">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-8 sm:py-32 md:grid-cols-[1fr_1.1fr] md:gap-20">
+        <div>
+          <p className="label text-gold">Also in the kitchen</p>
+          <h2 id="prep-title" className="font-black mt-4 text-[clamp(2.6rem,7vw,5rem)] text-gold">
+            <LiftText>Prep cook</LiftText>
+          </h2>
+          <p className="mt-6 max-w-lg text-[1.1rem] leading-relaxed text-paper/80">
+            Alongside her painting, Forough is open to prep cook work in Vancouver kitchens. The same steady hands and eye for detail that go into a gold-leaf edge go into clean cuts, even portions and a tidy station.
+          </p>
+          <PullUp steps={4} className="mt-10 w-fit">
+            <span className="flex items-center gap-4 border-2 border-gold px-6 py-5">
+              <span aria-hidden className="font-black text-[2.6rem] text-gold">&#10003;</span>
+              <span>
+                <span className="label block text-gold">Certified</span>
+                <span className="font-display block text-[1.5rem] leading-tight">FOODSAFE Level 1</span>
+              </span>
+            </span>
+          </PullUp>
+          <div className="mt-10">
+            <Link href="#contact" className="btn bg-gold text-char hover:brightness-105">Hiring for your kitchen? Get in touch <span aria-hidden>&rarr;</span></Link>
+          </div>
+        </div>
+        <div>
+          <p className="label text-paper/70">What the role asks for in BC</p>
+          <ul className="mt-5 border-t border-paper/20">
+            {PREP_NEEDS.map((n, i) => (
+              <li key={n.t} className="border-b border-paper/20 py-5">
+                <span className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                  <span className="font-display text-[1.35rem] leading-tight">
+                    <span className="label mr-3 text-gold">{String(i + 1).padStart(2, "0")}</span>
+                    {n.t}
+                  </span>
+                  {n.has && <span className="label shrink-0 text-gold">&#10003; Covered by FOODSAFE</span>}
+                </span>
+                <span className="mt-2 block text-[0.98rem] leading-relaxed text-paper/70">{n.d}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </Stage>
   );
