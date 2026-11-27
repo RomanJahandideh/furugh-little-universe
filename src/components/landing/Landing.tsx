@@ -25,10 +25,10 @@ export function Landing({ paintingPicks, floors }: { paintingPicks: PaintingPhot
     <main id="main" className="overflow-x-clip">
       <Hero />
       <About />
+      <PrepCook />
       <ProcessVideos linkToPainting />
       {floors.length > 1 && <Elevator floors={floors} />}
       <Selected paintingPicks={paintingPicks} />
-      <PrepCook />
       <ContactSection
         title="Let’s talk about your project."
         intro="A wall or ceiling that needs painting, or a prep cook for your kitchen? Send a message and it goes straight to Forough's inbox."
