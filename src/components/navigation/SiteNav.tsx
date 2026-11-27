@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const PATHS = [
   { href: "/decorative-painting/", key: "decorative-painting", label: "Decorative Painting" },
+  { href: "/nails/", key: "nails", label: "Nail Artistry" },
   { href: "/#prep", key: "prep", label: "Prep Cook" },
 ];
 
