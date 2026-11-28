@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { MotionConfig } from "motion/react";
+import { LanguageProvider } from "@/i18n/Language";
 import { SiteNav } from "@/components/navigation/SiteNav";
 import { CursorBadge } from "@/components/stage/Cursor";
 import { StageController } from "@/components/stage/Stage";
@@ -56,12 +57,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <LanguageProvider>
         <MotionConfig reducedMotion="user">
           <SiteNav />
           <StageController />
           <CursorBadge />
           {children}
         </MotionConfig>
+        </LanguageProvider>
       </body>
     </html>
   );

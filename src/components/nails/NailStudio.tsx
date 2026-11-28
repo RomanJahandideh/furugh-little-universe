@@ -11,7 +11,7 @@ import { portrait } from "@/data/portrait";
 import { siteConfig } from "@/data/site-config";
 import type { GalleryArtwork } from "@/lib/artworks";
 import { asset } from "@/lib/paths";
-import { CertificateCard } from "./Certificate";
+import { CertificateDocument, hasCertificate } from "./Certificate";
 import { NailEnquiryForm, type EnquiryPreset } from "./NailEnquiryForm";
 import { NailGallery } from "./NailGallery";
 import { NailSection, ReadingProgress, SectionHead } from "./parts";
@@ -19,8 +19,7 @@ import { ServiceList } from "./ServiceList";
 
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 
-const INDEX = [
-  ["qualifications", "Certificate"],
+const INDEX_ALL = [
   ["about", "About"],
   ["services", "Services"],
   ["craft", "The craft"],
@@ -52,6 +51,7 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
       <Hero art={art} count={artworks.length} />
 
       {/* ---------- 02 Qualifications ---------- */}
+      {hasCertificate && (
       <NailSection tone="espresso" id="qualifications">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-12 lg:gap-x-14 lg:gap-y-8">
           <SectionHead id="qualifications" n="02" label="Certification" title="Professional Training. Genuine Expertise." light className="lg:col-span-5 lg:row-start-1 lg:self-end" />
@@ -62,12 +62,11 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
             </div>
           </div>
           <div className="lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:self-center">
-            <PullUp steps={6}>
-              <CertificateCard onRequest={ask("Professional credentials request")} />
-            </PullUp>
+            <CertificateDocument light />
           </div>
         </div>
       </NailSection>
+      )}
 
       {/* ---------- 03 About ---------- */}
       <NailSection tone="nude" id="about">
@@ -210,10 +209,8 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#portfolio" className="btn bg-ivory text-espresso hover:bg-champagne">View my portfolio</a>
-              {nailBrand.resumeFile ? (
-                <a href={asset(nailBrand.resumeFile)} download className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Download my résumé</a>
-              ) : (
-                <button type="button" onClick={ask("Résumé request")} className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Request my résumé</button>
+              {nailBrand.resumeFile && (
+                <a href={asset(nailBrand.resumeFile)} download className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Download my résumé (PDF)</a>
               )}
               <button type="button" onClick={ask("Professional salon opportunity")} className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Discuss professional opportunities</button>
             </div>
@@ -315,6 +312,8 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
     </main>
   );
 }
+
+const INDEX = [...(hasCertificate ? ([["qualifications", "Certificate"]] as const) : []), ...INDEX_ALL];
 
 /* ---------------- 01 Hero ---------------- */
 function Hero({ art, count }: { art: (id: string) => GalleryArtwork | undefined; count: number }) {

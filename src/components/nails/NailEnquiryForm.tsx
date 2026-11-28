@@ -124,7 +124,7 @@ export function NailEnquiryForm({ preset, idPrefix = "ne" }: { preset: EnquiryPr
       <div className="sm:col-span-2">
         <label htmlFor={id("type")} className={lbl}>What is this about?</label>
         <select id={id("type")} name="type" value={type} onChange={(e) => setType(e.target.value as EnquiryType)} className="nail-field">
-          {enquiryTypes.map((t) => <option key={t}>{t}</option>)}
+          {enquiryTypes.map((t) => <option key={t} value={t}>{t}</option>)}
         </select>
       </div>
       <div>
@@ -149,14 +149,14 @@ export function NailEnquiryForm({ preset, idPrefix = "ne" }: { preset: EnquiryPr
             <label htmlFor={id("service")} className={lbl}>Preferred service</label>
             <select id={id("service")} name="service" defaultValue={preset.service ?? ""} key={preset.service ?? "none"} className="nail-field">
               <option value="">Not sure yet</option>
-              {services.map((s) => <option key={s.id}>{s.name}</option>)}
+              {services.map((s) => <option key={s.id} value={s.name}>{s.name}</option>)}
             </select>
           </div>
           <div>
             <label htmlFor={id("condition")} className={lbl}>Current nail condition</label>
             <select id={id("condition")} name="condition" defaultValue="" className="nail-field">
               <option value="">Choose…</option>
-              {CONDITIONS.map((c) => <option key={c}>{c}</option>)}
+              {CONDITIONS.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div>
@@ -167,14 +167,14 @@ export function NailEnquiryForm({ preset, idPrefix = "ne" }: { preset: EnquiryPr
             <label htmlFor={id("shape")} className={lbl}>Preferred shape</label>
             <select id={id("shape")} name="shape" defaultValue="" className="nail-field">
               <option value="">Choose…</option>
-              {SHAPES.map((c) => <option key={c}>{c}</option>)}
+              {SHAPES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div>
             <label htmlFor={id("length")} className={lbl}>Preferred length</label>
             <select id={id("length")} name="length" defaultValue="" className="nail-field">
               <option value="">Choose…</option>
-              {LENGTHS.map((c) => <option key={c}>{c}</option>)}
+              {LENGTHS.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div className="sm:col-span-2">

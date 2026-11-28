@@ -290,6 +290,5 @@ export const enquiryTypes = [
   "Creative collaboration",
   "Portfolio request",
   "Professional credentials request",
-  "Résumé request",
 ] as const;
 export type EnquiryType = (typeof enquiryTypes)[number];

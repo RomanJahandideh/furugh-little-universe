@@ -8,7 +8,7 @@ import { competencies, nailBrand } from "@/data/nails";
 import { siteConfig } from "@/data/site-config";
 import type { GalleryArtwork } from "@/lib/artworks";
 import { asset } from "@/lib/paths";
-import { CertificateCard } from "./Certificate";
+import { CertificateDocument, hasCertificate } from "./Certificate";
 import { NailEnquiryForm } from "./NailEnquiryForm";
 import { NailSection, ReadingProgress, SectionHead } from "./parts";
 
@@ -44,7 +44,7 @@ export function ProfessionalProfile({ artworks }: { artworks: GalleryArtwork[] }
                 <a href="#profile-contact" className="btn bg-espresso text-ivory hover:bg-burgundy">Discuss an opportunity</a>
                 <Link href="/nails/#portfolio" className="btn border border-espresso hover:bg-espresso hover:text-ivory">Full portfolio</Link>
                 {nailBrand.resumeFile && (
-                  <a href={asset(nailBrand.resumeFile)} download className="btn border border-espresso hover:bg-espresso hover:text-ivory">Download résumé</a>
+                  <a href={asset(nailBrand.resumeFile)} download className="btn border border-espresso hover:bg-espresso hover:text-ivory">Download résumé (PDF)</a>
                 )}
               </div>
             </div>
@@ -101,6 +101,7 @@ export function ProfessionalProfile({ artworks }: { artworks: GalleryArtwork[] }
         </div>
       </NailSection>
 
+      {hasCertificate && (
       <NailSection tone="nude" id="certification">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -110,15 +111,16 @@ export function ProfessionalProfile({ artworks }: { artworks: GalleryArtwork[] }
             </p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <CertificateCard />
+            <CertificateDocument />
           </div>
         </div>
       </NailSection>
+      )}
 
       <NailSection tone="ivory" id="profile-contact">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionHead id="profile-contact" n="04" label="Contact" title="Let’s Talk." intro="For salon positions, studio collaborations, a résumé or the certified translation of my certificate, send a message below." />
+            <SectionHead id="profile-contact" n="04" label="Contact" title="Let’s Talk." intro="For salon positions, studio collaborations or the certified translation of my certificate, send a message below." />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <NailEnquiryForm preset={PROFILE_PRESET} idPrefix="pp" />

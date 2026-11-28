@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LanguageSwitch } from "@/i18n/Language";
 
 const PATHS = [
   { href: "/decorative-painting/", key: "decorative-painting", label: "Decorative Painting" },
@@ -55,7 +56,12 @@ export function SiteNav() {
               Contact
             </a>
           </li>
+          <li>
+            <LanguageSwitch />
+          </li>
         </ul>
+
+        <LanguageSwitch className="ml-auto md:hidden" />
 
         <button
           type="button"
