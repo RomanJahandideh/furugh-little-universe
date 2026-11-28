@@ -26,7 +26,7 @@ Never add stock or AI images as her work.
 Edit `src/data/site-config.ts`. Anything set to `null` is hidden (for example `instagramUrl`).
 
 ## Add a résumé
-Put the PDF in `public/resume/` and set `nailBrand.resumeFile` in `nails.ts` (e.g. `"/resume/forough-nails.pdf"`). "Request my résumé" then becomes "Download my résumé".
+Each section has its own CV. Put the PDF in `public/resume/` and set `resumes.nails`, `resumes.painting` or `resumes.cooking` in `src/data/site-config.ts` (e.g. `"/resume/forough-nails-cv.pdf"`). The matching download button appears only once its path is set.
 
 ## Certificate
 Details are in `certificate` in `nails.ts`. The status (Valid / Expired) is worked out from `validUntil` when the site is built. Never add the national ID number, QR code or a scan of the original certificate to the public folder.

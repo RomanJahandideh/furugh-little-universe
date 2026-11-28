@@ -21,6 +21,16 @@ export const siteConfig = {
    * FormSubmit then shows a random alias: put it in `formAlias` to keep the
    * address out of the page source.
    */
+  /**
+   * One CV per section. Put the PDF in public/resume/ and set its path here
+   * (e.g. "/resume/forough-nails-cv.pdf"). null = no download button shown.
+   */
+  resumes: {
+    nails: null as string | null,
+    painting: null as string | null,
+    cooking: null as string | null,
+  },
+
   contactForm: {
     formAlias: null as string | null,
   },

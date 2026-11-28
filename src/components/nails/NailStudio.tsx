@@ -209,8 +209,8 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#portfolio" className="btn bg-ivory text-espresso hover:bg-champagne">View my portfolio</a>
-              {nailBrand.resumeFile && (
-                <a href={asset(nailBrand.resumeFile)} download className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Download my résumé (PDF)</a>
+              {siteConfig.resumes.nails && (
+                <a href={asset(siteConfig.resumes.nails)} download className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Download my résumé (PDF)</a>
               )}
               <button type="button" onClick={ask("Professional salon opportunity")} className="btn border border-ivory/60 hover:bg-ivory hover:text-espresso">Discuss professional opportunities</button>
             </div>

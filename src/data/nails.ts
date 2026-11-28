@@ -18,8 +18,6 @@ export const nailBrand = {
   /** Area shown in nail copy. The city itself comes from siteConfig.contact.city. */
   area: "Greater Vancouver",
   yearsExperience: 3,
-  /** Set to a file in /public (e.g. "/resume/forough-nails.pdf") to show a download button. */
-  resumeFile: null as string | null,
   /** Set to true only once services and availability are confirmed. */
   acceptingAppointments: true,
 };

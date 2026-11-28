@@ -13,6 +13,7 @@ import { ProcessVideos } from "@/components/painting/ProcessVideos";
 import { VerbCycle } from "@/components/stage/Cursor";
 import { Stage } from "@/components/stage/Stage";
 import { portrait } from "@/data/portrait";
+import { siteConfig } from "@/data/site-config";
 import type { PaintingPhoto } from "@/lib/paintings";
 import { asset } from "@/lib/paths";
 
@@ -135,8 +136,11 @@ function About() {
           <p className="rise mt-6 max-w-lg text-[1.1rem] leading-relaxed text-paper/80" style={v({ "--i": 2 })}>
             I&rsquo;m Forough, a decorative painter based in Vancouver, BC. For me, it&rsquo;s all in the details: the curl of a carved scroll, the edge of a sheet of gold leaf, a single petal on a painted branch. And colour is where every wall begins. I mix and layer each tone by hand, from soft plaster finishes to deep teal, warm gold and blossom pink, until it feels right in the room.
           </p>
-          <div className="rise mt-8" style={v({ "--i": 3 })}>
+          <div className="rise mt-8 flex flex-wrap gap-3" style={v({ "--i": 3 })}>
             <Link href="/decorative-painting/" className="btn bg-gold text-char hover:brightness-105">See the painting work <span aria-hidden>&rarr;</span></Link>
+            {siteConfig.resumes.painting && (
+              <a href={asset(siteConfig.resumes.painting)} download className="btn border border-gold/80 text-paper hover:bg-gold hover:text-char">Download my painting CV (PDF)</a>
+            )}
           </div>
         </div>
       </Reveal>
@@ -219,8 +223,11 @@ function PrepCook() {
               </span>
             </span>
           </PullUp>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-3">
             <Link href="#contact" className="btn bg-gold text-char hover:brightness-105">Hiring for your kitchen? Get in touch <span aria-hidden>&rarr;</span></Link>
+            {siteConfig.resumes.cooking && (
+              <a href={asset(siteConfig.resumes.cooking)} download className="btn border border-gold/80 text-paper hover:bg-gold hover:text-char">Download my kitchen CV (PDF)</a>
+            )}
           </div>
         </div>
         <div>

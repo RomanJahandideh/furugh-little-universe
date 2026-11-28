@@ -701,6 +701,8 @@ export const fr: Record<string, string> = {
   "View my portfolio": "Voir mon portfolio",
   "Download my résumé (PDF)": "Télécharger mon CV (PDF)",
   "Download résumé (PDF)": "Télécharger le CV (PDF)",
+  "Download my painting CV (PDF)": "Télécharger mon CV peinture (PDF)",
+  "Download my kitchen CV (PDF)": "Télécharger mon CV cuisine (PDF)",
   "Discuss professional opportunities": "Discuter d’occasions professionnelles",
   "Open my one-page professional profile": "Voir mon profil professionnel d’une page",
 

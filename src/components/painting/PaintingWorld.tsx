@@ -7,6 +7,8 @@ import { LiftText, PullUp } from "@/components/mechanics/PullUp";
 import { VerbCycle } from "@/components/stage/Cursor";
 import { Stage, type StageName } from "@/components/stage/Stage";
 import { paintingGroups } from "@/data/paintings";
+import { siteConfig } from "@/data/site-config";
+import { asset } from "@/lib/paths";
 import { paintingVideos } from "@/data/videos";
 import type { PaintingPhoto } from "@/lib/paintings";
 import { LoopVideo } from "./LoopVideo";
@@ -47,6 +49,9 @@ export function PaintingWorld({ paintings }: { paintings: PaintingPhoto[] }) {
             <span aria-hidden className="pb-1 text-xl">&darr;</span>
             <VerbCycle words={["Scroll", "Lift", "Hoist", "Raise", "Climb"]} />
           </p>
+          {siteConfig.resumes.painting && (
+            <a href={asset(siteConfig.resumes.painting)} download className="btn mt-8 bg-gold text-char hover:brightness-105">Download my painting CV (PDF)</a>
+          )}
 
           {lead && (
             <div className="mt-14 grid items-end gap-10 md:mt-20 md:grid-cols-[1.1fr_0.9fr] md:gap-16">

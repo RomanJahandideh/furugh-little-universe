@@ -43,8 +43,8 @@ export function ProfessionalProfile({ artworks }: { artworks: GalleryArtwork[] }
               <div className="mt-9 flex flex-wrap gap-3">
                 <a href="#profile-contact" className="btn bg-espresso text-ivory hover:bg-burgundy">Discuss an opportunity</a>
                 <Link href="/nails/#portfolio" className="btn border border-espresso hover:bg-espresso hover:text-ivory">Full portfolio</Link>
-                {nailBrand.resumeFile && (
-                  <a href={asset(nailBrand.resumeFile)} download className="btn border border-espresso hover:bg-espresso hover:text-ivory">Download résumé (PDF)</a>
+                {siteConfig.resumes.nails && (
+                  <a href={asset(siteConfig.resumes.nails)} download className="btn border border-espresso hover:bg-espresso hover:text-ivory">Download résumé (PDF)</a>
                 )}
               </div>
             </div>
