@@ -191,9 +191,21 @@ export function NailLoupe({ art }: { art: (id: string) => GalleryArtwork | undef
                   transition={{ type: "spring", stiffness: 380, damping: 24 }}
                   className="pointer-events-none absolute z-10"
                 >
-                  {/* handle */}
-                  <span className="absolute left-[86%] top-[86%] block h-[20%] w-[42%] origin-left rotate-45 rounded-full bg-gradient-to-b from-[#7a5a4a] to-[#3a2622] shadow-[0_8px_18px_rgba(0,0,0,0.45)]" />
-                  <span className="absolute left-[80%] top-[80%] block h-[16%] w-[16%] rotate-45 rounded-sm bg-gradient-to-br from-[#e6d3b5] to-[#a88a62]" />
+                  {/* soft shadow cast on the photo */}
+                  <span className="absolute left-[14%] top-[20%] block h-full w-full rounded-full bg-black/45 blur-[18px]" />
+                  {/* handle: gold ferrule + black lacquer grip, leaving the rim at 45° */}
+                  <span className="absolute left-1/2 top-1/2 block h-0 origin-left rotate-45" style={{ width: lens * 1.05 }}>
+                    <span
+                      className="absolute top-0 block -translate-y-1/2 rounded-[3px] bg-[linear-gradient(180deg,#f6e7c8_0%,#c9a46a_45%,#8a6a3e_100%)] shadow-[0_2px_6px_rgba(0,0,0,0.4)]"
+                      style={{ left: lens / 2 - 2, width: lens * 0.11, height: lens * 0.12 }}
+                    />
+                    <span
+                      className="absolute top-0 block -translate-y-1/2 rounded-r-full bg-[linear-gradient(180deg,#4a3a36_0%,#1b1311_55%,#0d0908_100%)] shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
+                      style={{ left: lens / 2 + lens * 0.1, width: lens * 0.42, height: lens * 0.14 }}
+                    >
+                      <span className="absolute inset-x-[6%] top-[18%] block h-[14%] rounded-full bg-white/25" />
+                    </span>
+                  </span>
                   {/* magnified photo */}
                   <motion.span
                     className="absolute inset-0 block rounded-full"
@@ -205,11 +217,23 @@ export function NailLoupe({ art }: { art: (id: string) => GalleryArtwork | undef
                       backgroundColor: "#1d1513",
                     }}
                   />
-                  {/* glass: rim, refraction edge, specular highlight */}
-                  <span className="absolute inset-0 rounded-full shadow-[0_24px_50px_-12px_rgba(0,0,0,0.65),inset_0_0_0_1.5px_rgba(255,255,255,0.85),inset_0_0_0_7px_rgba(198,173,141,0.55),inset_0_0_0_8px_rgba(255,255,255,0.5),inset_0_0_18px_4px_rgba(0,0,0,0.18)]" />
-                  <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_22%,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0.12)_18%,transparent_38%)]" />
-                  <span className="absolute inset-[10%] rounded-full border border-white/15" />
-                  <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/60 px-2.5 py-1 text-[0.72rem] font-semibold text-white backdrop-blur-sm">
+                  {/* glass: edge darkening, broad glare, small counter-reflection */}
+                  <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle,transparent_62%,rgba(0,0,0,0.28)_100%)]" />
+                  <span className="absolute left-[14%] top-[9%] block h-[34%] w-[56%] -rotate-[28deg] rounded-[50%] bg-[linear-gradient(180deg,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0.08)_70%,transparent_100%)]" />
+                  <span className="absolute bottom-[13%] right-[16%] block h-[10%] w-[22%] -rotate-[28deg] rounded-[50%] bg-white/20 blur-[2px]" />
+                  {/* polished gold bezel */}
+                  <span
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: "conic-gradient(from 210deg, #fff4dc, #c9a46a 18%, #7d5f36 32%, #e9d2a6 50%, #a8834e 66%, #fbefd6 82%, #fff4dc)",
+                      WebkitMask: `radial-gradient(circle, transparent ${lens / 2 - lens * 0.065}px, #000 ${lens / 2 - lens * 0.065 + 0.5}px)`,
+                      mask: `radial-gradient(circle, transparent ${lens / 2 - lens * 0.065}px, #000 ${lens / 2 - lens * 0.065 + 0.5}px)`,
+                      boxShadow: "0 18px 40px -10px rgba(0,0,0,0.6)",
+                    }}
+                  />
+                  <span className="absolute rounded-full shadow-[0_0_0_1px_rgba(40,25,15,0.55),inset_0_2px_6px_rgba(0,0,0,0.35)]" style={{ inset: lens * 0.065 }} />
+                  <span className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6)]" />
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-champagne/60 bg-espresso/85 px-3 py-1 text-[0.72rem] font-semibold tracking-wide text-champagne backdrop-blur-sm">
                     {zoom.toFixed(1)}× {!hiLoaded[piece.id] && "· loading HD"}
                   </span>
                 </motion.div>
