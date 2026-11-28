@@ -20,12 +20,12 @@ import { ServiceList } from "./ServiceList";
 const v = (o: Record<string, string | number>) => o as CSSProperties;
 
 const INDEX = [
+  ["qualifications", "Certificate"],
   ["about", "About"],
   ["services", "Services"],
   ["craft", "The craft"],
   ["portfolio", "Portfolio"],
   ["care", "Hygiene"],
-  ["qualifications", "Qualifications"],
   ["experience", "Experience"],
   ["inquire", "Enquire"],
 ] as const;
@@ -51,7 +51,25 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
       <ReadingProgress />
       <Hero art={art} count={artworks.length} />
 
-      {/* ---------- 02 About ---------- */}
+      {/* ---------- 02 Qualifications ---------- */}
+      <NailSection tone="espresso" id="qualifications">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-12 lg:gap-x-14 lg:gap-y-8">
+          <SectionHead id="qualifications" n="02" label="Certification" title="Professional Training. Genuine Expertise." light className="lg:col-span-5 lg:row-start-1 lg:self-end" />
+          <div className="order-3 lg:order-none lg:col-span-5 lg:row-start-2">
+            <div className="space-y-4 text-[1.04rem] leading-relaxed text-ivory/80">
+              <p>My professional vocational certification in Nail Care and Correction Technology reflects my commitment to developing practical nail care skills through structured training and formal competency assessment.</p>
+              <p>Combined with {nailBrand.yearsExperience} years of hands-on experience, this qualification forms part of my foundation in nail preparation, cosmetic nail enhancements, nail maintenance, and artistic nail design.</p>
+            </div>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:self-center">
+            <PullUp steps={6}>
+              <CertificateCard onRequest={ask("Professional credentials request")} />
+            </PullUp>
+          </div>
+        </div>
+      </NailSection>
+
+      {/* ---------- 03 About ---------- */}
       <NailSection tone="nude" id="about">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
@@ -82,7 +100,7 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
             </ul>
           </div>
           <div className="lg:col-span-6 lg:col-start-7 lg:pt-10">
-            <SectionHead id="about" n="02" label="About the artist" title="The Artist Behind the Details" />
+            <SectionHead id="about" n="03" label="About the artist" title="The Artist Behind the Details" />
             <div className="mt-8 space-y-5 text-[1.06rem] leading-relaxed text-espresso/85">
               <p>
                 My name is Forough Mahmoudpour, and I am a professionally trained Nail Technician and Nail Artist with {nailBrand.yearsExperience} years of practical experience in nail care, gel enhancements, precision manicures, and creative nail design.
@@ -101,11 +119,11 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
         </div>
       </NailSection>
 
-      {/* ---------- 03 Services ---------- */}
+      {/* ---------- 04 Services ---------- */}
       <NailSection tone="ivory" id="services">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <div className="grid gap-8 lg:grid-cols-12">
-            <SectionHead id="services" n="03" label="Services" title="Professional Nail Services" className="lg:col-span-7" />
+            <SectionHead id="services" n="04" label="Services" title="Professional Nail Services" className="lg:col-span-7" />
             <p className="self-end text-[1.06rem] leading-relaxed text-espresso/75 lg:col-span-4 lg:col-start-9">
               Eleven services in four groups. Open any one for the full description, the techniques involved, and photos of real work where they exist.
             </p>
@@ -116,12 +134,12 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
 
       <Craft art={art} />
 
-      {/* ---------- 05 Portfolio ---------- */}
+      {/* ---------- 06 Portfolio ---------- */}
       <NailSection tone="ivory" id="portfolio">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <SectionHead
             id="portfolio"
-            n="05"
+            n="06"
             label="Portfolio"
             title={<>A Collection of <em className="text-burgundy">Small Masterpieces</em></>}
             intro="A curated collection of nail enhancements, artistic compositions, delicate details and personalized designs. Every photo here is Forough's own work. Open any set for its details."
@@ -130,11 +148,11 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
         </div>
       </NailSection>
 
-      {/* ---------- 06 Hygiene ---------- */}
+      {/* ---------- 07 Hygiene ---------- */}
       <NailSection tone="burgundy" id="care">
         <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
           <div className="grid gap-10 lg:grid-cols-12">
-            <SectionHead id="care" n="06" label="Hygiene & standards" title="Beauty Begins with Care." light className="lg:col-span-6" />
+            <SectionHead id="care" n="07" label="Hygiene & standards" title="Beauty Begins with Care." light className="lg:col-span-6" />
             <div className="space-y-4 text-[1.04rem] leading-relaxed text-ivory/80 lg:col-span-5 lg:col-start-8 lg:pt-14">
               <p>Cleanliness, hygiene, and responsible nail care are essential parts of professional nail artistry.</p>
               <p>My approach prioritizes a clean working environment, carefully prepared tools, thoughtful product application, and respect for the condition of each client&rsquo;s natural nails. A beautiful result also means a comfortable, responsible experience.</p>
@@ -154,24 +172,6 @@ export function NailStudio({ artworks }: { artworks: GalleryArtwork[] }) {
           <p className="font-editorial mt-16 max-w-4xl text-[clamp(1.8rem,3.6vw,3rem)] italic leading-tight text-champagne">
             Precision in technique. Responsibility in care. Attention to every detail.
           </p>
-        </div>
-      </NailSection>
-
-      {/* ---------- 07 Qualifications ---------- */}
-      <NailSection tone="ivory" id="qualifications">
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <SectionHead id="qualifications" n="07" label="Certification" title="Professional Training. Genuine Expertise." />
-            <div className="mt-8 space-y-4 text-[1.04rem] leading-relaxed text-espresso/80">
-              <p>My professional vocational certification in Nail Care and Correction Technology reflects my commitment to developing practical nail care skills through structured training and formal competency assessment.</p>
-              <p>Combined with {nailBrand.yearsExperience} years of hands-on experience, this qualification forms part of my foundation in nail preparation, cosmetic nail enhancements, nail maintenance, and artistic nail design.</p>
-            </div>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <PullUp steps={6}>
-              <CertificateCard onRequest={ask("Professional credentials request")} />
-            </PullUp>
-          </div>
         </div>
       </NailSection>
 
@@ -386,13 +386,13 @@ function Hero({ art, count }: { art: (id: string) => GalleryArtwork | undefined;
   );
 }
 
-/* ---------------- 04 The craft: six stages, the active one highlighted ---------------- */
+/* ---------------- 05 The craft: six stages, the active one highlighted ---------------- */
 function Craft({ art }: { art: (id: string) => GalleryArtwork | undefined }) {
   return (
     <NailSection tone="espresso" id="craft">
       <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <div className="grid gap-8 lg:grid-cols-12">
-          <SectionHead id="craft" n="04" label="Technical expertise" title="The Craft Behind Every Set" light className="lg:col-span-7" />
+          <SectionHead id="craft" n="05" label="Technical expertise" title="The Craft Behind Every Set" light className="lg:col-span-7" />
           <p className="self-end leading-relaxed text-ivory/75 lg:col-span-4 lg:col-start-9">
             Professional nail artistry is far more than colour. Every set moves through six stages, from preparation and architecture to artistry and the final finish.
           </p>
