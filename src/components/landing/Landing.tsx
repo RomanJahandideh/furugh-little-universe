@@ -14,6 +14,7 @@ import { VerbCycle } from "@/components/stage/Cursor";
 import { Stage } from "@/components/stage/Stage";
 import { portrait } from "@/data/portrait";
 import { siteConfig } from "@/data/site-config";
+import type { GalleryArtwork } from "@/lib/artworks";
 import type { PaintingPhoto } from "@/lib/paintings";
 import { asset } from "@/lib/paths";
 
@@ -21,18 +22,19 @@ const v = (o: Record<string, string | number>) => o as CSSProperties;
 const srcset = (p: { name: string; widths: number[] }) =>
   p.widths.map((w) => `${asset(`/images/profile/${p.name}-${w}.webp`)} ${w}w`).join(", ");
 
-export function Landing({ paintingPicks, floors }: { paintingPicks: PaintingPhoto[]; floors: PaintingPhoto[] }) {
+export function Landing({ paintingPicks, floors, nailPicks }: { paintingPicks: PaintingPhoto[]; floors: PaintingPhoto[]; nailPicks: GalleryArtwork[] }) {
   return (
     <main id="main" className="overflow-x-clip">
       <Hero />
       <About />
+      <NailWork picks={nailPicks} />
       <PrepCook />
       <ProcessVideos linkToPainting />
       {floors.length > 1 && <Elevator floors={floors} />}
       <Selected paintingPicks={paintingPicks} />
       <ContactSection
         title="Let’s talk about your project."
-        intro="A wall or ceiling that needs painting, or a prep cook for your kitchen? Send a message and it goes straight to Forough's inbox."
+        intro="A nail appointment, a salon position, a painted wall or a prep cook for your kitchen? Send a message and it goes straight to Forough's inbox."
         subject="New message from furugh.com"
       />
       <Footer />
@@ -79,14 +81,14 @@ function Hero() {
             <span className="block whitespace-nowrap">Mahmoudpour</span>
           </h1>
           <p className="hero-in mt-4 max-w-md text-[1.1rem] leading-snug text-white/85 sm:text-[1.25rem]" style={v({ "--d": "0.5s" })}>
-            Decorative painting for walls, ceilings and domes.
+            Nail technician and nail artist. Also decorative painting and kitchen prep.
           </p>
           <p className="hero-in font-black mt-5 flex items-end gap-3 text-[1.8rem] uppercase text-gold md:text-[2.4rem]" style={v({ "--d": "0.6s" })}>
             <span aria-hidden className="pb-1 text-xl">&darr;</span>
             <VerbCycle words={["Scroll", "Lift", "Hoist", "Raise", "Climb"]} />
           </p>
           <nav aria-label="Start here" className="hero-in mt-6 grid gap-3 sm:max-w-xl sm:grid-cols-2" style={v({ "--d": "0.75s" })}>
-            <PathLink href="/decorative-painting/" n="01" title="See the painting work" />
+            <PathLink href="/nails/" n="01" title="See the nail work" />
             <PathLink href="#contact" n="02" title="Get in touch" />
           </nav>
         </div>
@@ -134,16 +136,52 @@ function About() {
             <LiftText>Hello, and welcome.</LiftText>
           </h2>
           <p className="rise mt-6 max-w-lg text-[1.1rem] leading-relaxed text-paper/80" style={v({ "--i": 2 })}>
-            I&rsquo;m Forough, a decorative painter based in Vancouver, BC. For me, it&rsquo;s all in the details: the curl of a carved scroll, the edge of a sheet of gold leaf, a single petal on a painted branch. And colour is where every wall begins. I mix and layer each tone by hand, from soft plaster finishes to deep teal, warm gold and blossom pink, until it feels right in the room.
+            I&rsquo;m Forough, a professionally trained nail technician and nail artist based in Vancouver, BC, with three years of experience in gel enhancements, sculpted extensions, Russian manicure and hand-painted nail art. For me, it&rsquo;s all in the details: a clean cuticle line, a balanced apex, a single petal painted with a fine brush. The same steady hand goes into my decorative painting on walls and ceilings.
           </p>
           <div className="rise mt-8 flex flex-wrap gap-3" style={v({ "--i": 3 })}>
-            <Link href="/decorative-painting/" className="btn bg-gold text-char hover:brightness-105">See the painting work <span aria-hidden>&rarr;</span></Link>
-            {siteConfig.resumes.painting && (
-              <a href={asset(siteConfig.resumes.painting)} download className="btn border border-gold/80 text-paper hover:bg-gold hover:text-char">Download my painting CV (PDF)</a>
+            <Link href="/nails/" className="btn bg-gold text-char hover:brightness-105">See the nail work <span aria-hidden>&rarr;</span></Link>
+            {siteConfig.resumes.nails && (
+              <a href={asset(siteConfig.resumes.nails)} download className="btn border border-gold/80 text-paper hover:bg-gold hover:text-char">Download my nail CV (PDF)</a>
             )}
           </div>
         </div>
       </Reveal>
+    </Stage>
+  );
+}
+
+/* ---------------- Nail work ---------------- */
+function NailWork({ picks }: { picks: GalleryArtwork[] }) {
+  if (!picks.length) return null;
+  return (
+    <Stage tone="paper" aria-labelledby="nailwork-title">
+      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p className="label text-ink-soft">Nail artistry</p>
+            <h2 id="nailwork-title" className="font-black mt-4 text-[clamp(2.6rem,7vw,5rem)]">
+              <LiftText>Beauty is in the details</LiftText>
+            </h2>
+            <p className="mt-5 max-w-lg text-[1.05rem] leading-relaxed text-ink-soft">
+              Sculpted gel extensions, Russian manicure, French, ombré and freehand nail art. Professionally trained, with a vocational certificate in Nail Care and Correction Technology.
+            </p>
+          </div>
+          <Link href="/nails/" className="btn btn-dark self-start md:self-auto">All nail work <span aria-hidden>&rarr;</span></Link>
+        </div>
+        <ul className="mt-12 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-6 lg:grid-cols-3">
+          {picks.map((a) => (
+            <li key={a.id}>
+              <Link href="/nails/#portfolio" data-cursor="Open" className="group block">
+                <PullUp className="bg-sand">
+                  <ArtImage art={a} sizes="(min-width: 1024px) 30vw, 46vw" className="aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                </PullUp>
+                <span className="label mt-3 block text-ink-soft">Nail artistry</span>
+                <span className="font-display mt-1 block text-xl">{a.title}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </Stage>
   );
 }

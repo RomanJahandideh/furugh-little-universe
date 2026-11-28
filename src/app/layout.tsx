@@ -17,19 +17,19 @@ const fraunces = Fraunces({
 const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], display: "swap" });
 
 const description =
-  "Forough Mahmoudpour: decorative painting for walls, ceilings and domes, and a FOODSAFE Level 1 certified prep cook. Based in Vancouver, BC.";
+  "Forough Mahmoudpour: nail technician and nail artist in Vancouver, BC. Also decorative painting for walls, ceilings and domes, and a FOODSAFE Level 1 certified prep cook.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
-  title: { default: "Forough Mahmoudpour | Decorative Painting & Prep Cook", template: "%s" },
+  title: { default: "Forough Mahmoudpour | Nail Technician, Decorative Painter & Prep Cook", template: "%s" },
   description,
   alternates: { canonical: absoluteUrl("/") },
   openGraph: {
     type: "website",
     siteName: "Forough Mahmoudpour",
-    title: "Forough Mahmoudpour | Decorative Painting & Prep Cook",
+    title: "Forough Mahmoudpour | Nail Technician, Decorative Painter & Prep Cook",
     description,
-    images: [{ url: absoluteUrl("/og/home.png"), width: 1200, height: 630, alt: "Forough Mahmoudpour, decorative painter and prep cook" }],
+    images: [{ url: absoluteUrl("/og/home.png"), width: 1200, height: 630, alt: "Forough Mahmoudpour, nail technician" }],
   },
   twitter: { card: "summary_large_image" },
 };

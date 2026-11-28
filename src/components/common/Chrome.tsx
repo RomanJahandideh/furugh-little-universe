@@ -81,8 +81,8 @@ export function Footer() {
         <p>&copy; {new Date().getFullYear()} Forough Mahmoudpour &middot; Vancouver, BC</p>
         <nav aria-label="Footer" className="flex gap-6">
           <Link href="/" className="hover:text-ink">Home</Link>
-          <Link href="/decorative-painting/" className="hover:text-ink">Decorative painting</Link>
           <Link href="/nails/" className="hover:text-ink">Nail artistry</Link>
+          <Link href="/decorative-painting/" className="hover:text-ink">Decorative painting</Link>
           <Link href="/#prep" className="hover:text-ink">Prep cook</Link>
         </nav>
       </div>

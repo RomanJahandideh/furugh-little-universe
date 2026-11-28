@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { LanguageSwitch } from "@/i18n/Language";
 
 const PATHS = [
-  { href: "/decorative-painting/", key: "decorative-painting", label: "Decorative Painting" },
   { href: "/nails/", key: "nails", label: "Nail Artistry" },
+  { href: "/decorative-painting/", key: "decorative-painting", label: "Decorative Painting" },
   { href: "/#prep", key: "prep", label: "Prep Cook" },
 ];
 

@@ -322,8 +322,8 @@ function Hero({ art, count }: { art: (id: string) => GalleryArtwork | undefined;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const yBig = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "10%"]);
   const ySmall = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "-22%"]);
-  const big = art("img-7903");
-  const small = art("img-0114");
+  const big = art("img-4898");
+  const small = art("img-1003");
 
   return (
     <NailSection tone="ivory" label="Forough, nail artist" className="relative">
@@ -353,7 +353,7 @@ function Hero({ art, count }: { art: (id: string) => GalleryArtwork | undefined;
               <div className="overflow-hidden bg-nude">
                 <ArtImage art={big} sizes="(min-width: 1024px) 38vw, 86vw" priority className="push-in aspect-[4/5] object-cover" />
               </div>
-              <p className="mt-2 text-right text-sm text-espresso/60">{big.title}, hand painted</p>
+              <p className="mt-2 text-right text-sm text-espresso/60">{big.title}</p>
             </motion.div>
           )}
           {small && (

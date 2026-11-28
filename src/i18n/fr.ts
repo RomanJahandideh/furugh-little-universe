@@ -703,6 +703,17 @@ export const fr: Record<string, string> = {
   "Download résumé (PDF)": "Télécharger le CV (PDF)",
   "Download my painting CV (PDF)": "Télécharger mon CV peinture (PDF)",
   "Download my kitchen CV (PDF)": "Télécharger mon CV cuisine (PDF)",
+  "Download my nail CV (PDF)": "Télécharger mon CV ongles (PDF)",
+  "Nail technician and nail artist. Also decorative painting and kitchen prep.": "Technicienne et artiste ongulaire. Aussi peinture décorative et préparation en cuisine.",
+  "See the nail work": "Voir mes ongles",
+  "All nail work": "Toutes les créations d’ongles",
+  "Beauty is in the details": "La beauté est dans les détails",
+  "Sculpted gel extensions, Russian manicure, French, ombré and freehand nail art. Professionally trained, with a vocational certificate in Nail Care and Correction Technology.":
+    "Rallonges en gel sculptées, manucure russe, French, ombré et nail art à main levée. Formation professionnelle, avec un certificat en technologie des soins et de la correction des ongles.",
+  "I’m Forough, a professionally trained nail technician and nail artist based in Vancouver, BC, with three years of experience in gel enhancements, sculpted extensions, Russian manicure and hand-painted nail art. For me, it’s all in the details: a clean cuticle line, a balanced apex, a single petal painted with a fine brush. The same steady hand goes into my decorative painting on walls and ceilings.":
+    "Je suis Forough, technicienne et artiste ongulaire formée professionnellement, établie à Vancouver (C.-B.), avec trois ans d’expérience en poses de gel, rallonges sculptées, manucure russe et nail art peint à la main. Pour moi, tout est dans les détails : une ligne de cuticule nette, un apex équilibré, un seul pétale peint au pinceau fin. La même main sûre se retrouve dans ma peinture décorative sur les murs et les plafonds.",
+  "A nail appointment, a salon position, a painted wall or a prep cook for your kitchen? Send a message and it goes straight to Forough's inbox.":
+    "Un rendez-vous pour vos ongles, un poste en salon, un mur à peindre ou un commis pour votre cuisine? Envoyez un message : il arrive directement dans la boîte de réception de Forough.",
   "Discuss professional opportunities": "Discuter d’occasions professionnelles",
   "Open my one-page professional profile": "Voir mon profil professionnel d’une page",
 
