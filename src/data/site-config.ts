@@ -26,9 +26,9 @@ export const siteConfig = {
    * (e.g. "/resume/forough-nails-cv.pdf"). null = no download button shown.
    */
   resumes: {
-    nails: null as string | null,
-    painting: null as string | null,
-    cooking: null as string | null,
+    nails: "/resume/Forough_Mahmoudpour_Nail_Technician_CV.pdf" as string | null,
+    painting: "/resume/Forough_Mahmoudpour_Painter_CV.pdf" as string | null,
+    cooking: "/resume/Forough_Mahmoudpour_Kitchen_CV.pdf" as string | null,
   },
 
   contactForm: {

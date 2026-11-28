@@ -15,7 +15,7 @@ export function CertificateDocument({ light = false }: { light?: boolean }) {
   const pdf = asset(cert.pdf!);
   return (
     <figure>
-      <a href={pdf} target="_blank" rel="noopener noreferrer" className="block space-y-3" aria-label="Open the certificate PDF in a new tab">
+      <a href={pdf} target="_blank" rel="noopener noreferrer" className="grid gap-3 sm:grid-cols-2" aria-label="Open the certificate PDF in a new tab">
         {cert.pages.map((p, i) => (
           <img
             key={p.src}
