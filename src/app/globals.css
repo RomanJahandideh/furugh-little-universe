@@ -177,3 +177,52 @@ dialog.art-dialog {
   }
   .js .reveal:not(.in) .rise { opacity: 1; transform: none; }
 }
+
+/* ---------- Nail Artistry palette (only used under /nails/) ---------- */
+:root {
+  --ivory: #f8f5f0;
+  --nude: #e8d8ce;
+  --rose: #c69c9c;
+  --espresso: #302522;
+  --burgundy: #692e3d;
+  --champagne: #c6ad8d;
+}
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-nude: var(--nude);
+  --color-rose: var(--rose);
+  --color-espresso: var(--espresso);
+  --color-burgundy: var(--burgundy);
+  --color-champagne: var(--champagne);
+}
+.font-editorial {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+.nail-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(48, 37, 34, 0.25);
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.nail-chip:hover { border-color: var(--espresso); }
+.nail-chip[aria-pressed="true"] { background: var(--espresso); color: var(--ivory); border-color: var(--espresso); }
+.nail-field {
+  width: 100%;
+  border: 1px solid rgba(48, 37, 34, 0.22);
+  background: #fff;
+  padding: 0.8rem 1rem;
+  color: var(--espresso);
+}
+.nail-field:focus { outline: 2px solid var(--burgundy); outline-offset: 1px; border-color: var(--burgundy); }
+.nail-field[aria-invalid="true"] { border-color: #a3283f; }
+.nail-chip { white-space: nowrap; flex-shrink: 0; }
+@keyframes scroll-cue { 0%, 100% { transform: scaleY(0.35); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } }
+.scroll-cue { animation: scroll-cue 2.4s var(--ease-out) infinite; }
+@media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; } }
